@@ -17,6 +17,8 @@ public class TaskDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("drop table if exists tasks");
     }
+
+
 }

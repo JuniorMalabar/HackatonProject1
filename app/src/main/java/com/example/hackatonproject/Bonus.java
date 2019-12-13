@@ -1,13 +1,15 @@
 package com.example.hackatonproject;
 
 public class Bonus {
+    private String organization;
     private String description;
-    private String value;
+    private String code;
     private Integer cost;
 
-    public Bonus(String _description, String _value, Integer _cost){
+    public Bonus(String _organization, String _description, String _code, Integer _cost){
+        organization = _organization;
         description = _description;
-        value = _value;
+        code = _code;
         cost = _cost;
     }
 }

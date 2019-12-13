@@ -2,6 +2,8 @@ package com.example.hackatonproject;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.exp;
+
 public class User {
     private Integer id;
     private String login;
@@ -10,7 +12,6 @@ public class User {
     private BonusesHistory history;
     private ArrayList<Task> tasks;
     private Integer rating; // Хранятся ОЧКИ рейтинга
-    private static UserDBHelper dbHelper;
 
     public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history, Integer _rating) {
         id = _id;
@@ -22,14 +23,8 @@ public class User {
         //dbHelper.saveUser(user) or dbHelper.editUser(user);
     }
 
-    public void setDBHelper(UserDBHelper helper){
-        dbHelper = helper;
-    }
-
-    public static User getUserByLoginPassword(String _login, String _password){
-        User user = null;
-        // Select from DB
-        return user;
+    public static boolean tryToRegistrate(String _login, String _password){
+        return false;
     }
 
     public static boolean isUnigueLogin(String _login){
@@ -50,5 +45,9 @@ public class User {
 
     public Integer getRating(){
         return rating;
+    }
+
+    public double getMultiplier(){
+        return 0.25*exp(-rating/1000.0) + 0.75;
     }
 }
