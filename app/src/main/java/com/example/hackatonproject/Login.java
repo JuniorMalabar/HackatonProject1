@@ -18,4 +18,7 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Registration.class);
         startActivity(intent);
     }
+
+    public void signIn(View view) {
+    }
 }
