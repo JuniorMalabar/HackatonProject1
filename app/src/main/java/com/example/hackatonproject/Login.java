@@ -28,7 +28,8 @@ public class Login extends AppCompatActivity {
         String login = loginText.getText().toString();
         String password = passwordText.getText().toString();
         if (User.tryToRegistrate(login, password)){
-
+            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+            startActivity(intent);
         }
     }
 }
