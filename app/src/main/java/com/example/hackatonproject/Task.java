@@ -6,9 +6,6 @@ enum Test_type {
 }
 
 public class Task {
-    public static final int TASK_TYPE_STEPS_COUNT = 0;
-    public static final int TASK_TYPE_GO_TO_POINT = 1;
-
     private Integer id;
     private int type;
     private String value;
