@@ -7,14 +7,15 @@ public class User {
     public Integer points;
     public BonusesHistory history;
     public static UserDBHelper dbHelper;
+
     public User() {
 
     }
     public static User getUserByLoginPassword(String l, String p){
         User user = null;
-        for (User candidate: dbHelper.userList) {
-            if ()
-        }
+
         return user;
     }
+
+    
 }
