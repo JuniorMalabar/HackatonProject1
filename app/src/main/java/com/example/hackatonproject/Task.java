@@ -5,19 +5,16 @@ import android.content.Context;
 public abstract class Task {
     public static int TASK_TYPE_STEPS_COUNT = 0;
     public static int TASK_TYPE_GO_TO_POINT = 1;
-    public static int TASK_DECISION_NOT_DECIDED = 0;
-    public static int TASK_DECISION_DECLINED = 1;
-    public static int TASK_DECISION_ACCEPTED = 2;
 
     private Integer id;
     private int type;
     private String value;
     private Integer ratingReward;
     private Integer pointsReward;
-    private int decision;
+    private boolean decision;
     private static TaskDBHelper dbHelper;
 
-    public Task(int _id, int _type, Integer _ratingReward, Integer _pointsReward, int _decision){
+    public Task(int _id, int _type, Integer _ratingReward, Integer _pointsReward, boolean _decision){
         id = _id;
         type = _type;
         value = null;
@@ -46,8 +43,25 @@ public abstract class Task {
         return pointsReward;
     }
 
-    public int getDecision(){
+    public boolean getDecision(){
         return decision;
+    }
+
+    public void finishCompletion(User user){
+        user.giveRatingReward(ratingReward);
+        user.givePointsReward(pointsReward);
+    }
+
+    public static Task generateTask(User user){
+        return null;
+    }
+
+    public void saveTask(){
+        dbHelper.insert(this);
+    }
+
+    public void setValueString(String valueString) {
+        value = valueString;
     }
 
     public abstract void parseValueString();
