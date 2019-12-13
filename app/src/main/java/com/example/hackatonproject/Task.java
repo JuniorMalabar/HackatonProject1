@@ -7,8 +7,11 @@ public class Task {
     private Integer id;
     private int type;
     private String value;
+    private Integer ratingReward;
+    private Integer pointsReward;
     private static TaskDBHelper dbHelper;
 
-    public Task(int id, int type, String value){
+    public Task(int _id, int _type, String _value, Integer _ratingReward, Integer _pointsReward){
+
     }
 }

@@ -9,25 +9,46 @@ public class User {
     private Integer points;
     private BonusesHistory history;
     private ArrayList<Task> tasks;
+    private Integer rating; // Хранятся ОЧКИ рейтинга
     private static UserDBHelper dbHelper;
 
-    public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history) {
+    public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history, Integer _rating) {
         id = _id;
         login = _login;
         password = _password;
         points = _points;
         history = _history;
-        //dbHelper.saveUser(user);
+        rating = _rating;
+        //dbHelper.saveUser(user) or dbHelper.editUser(user);
     }
 
     public void setDBHelper(UserDBHelper helper){
-
+        dbHelper = helper;
     }
+
     public static User getUserByLoginPassword(String _login, String _password){
         User user = null;
-
+        // Select from DB
         return user;
     }
 
+    public static boolean isUnigueLogin(String _login){
+        return false; // на самом деле return запись_из_дб != null
+    }
 
+    public Integer getPoints(){
+        return points;
+    }
+
+    public ArrayList<Task> getTasks(){
+        return new ArrayList<>(tasks);
+    }
+
+    public BonusesHistory getHistory(){
+        return history;
+    }
+
+    public Integer getRating(){
+        return rating;
+    }
 }

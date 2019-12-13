@@ -7,12 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TaskDBHelper extends SQLiteOpenHelper {
 
     public TaskDBHelper(Context context){
-        super(context, "tasksDB", null, 1);
+        super(context, "TasksDB", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null);");
     }
 
     @Override

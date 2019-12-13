@@ -8,6 +8,6 @@ public class BonusesHistory {
 
     public BonusesHistory(Integer _userId, ArrayList<Bonus> _bonuses){
         userId = _userId;
-        bonuses = new ArrayList<>(bonuses);
+        bonuses = new ArrayList<>(_bonuses);
     }
 }
