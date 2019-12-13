@@ -12,5 +12,7 @@ public class TasksView extends ListActivity {
         setContentView(R.layout.task_tab);
 
     }
+
+
 }
 
