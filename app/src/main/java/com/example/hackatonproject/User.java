@@ -6,8 +6,15 @@ public class User {
     public String password;
     public Integer points;
     public BonusesHistory history;
+    public static UserDBHelper dbHelper;
     public User() {
 
     }
-    public static boolean is
+    public static User getUserByLoginPassword(String l, String p){
+        User user = null;
+        for (User candidate: dbHelper.userList) {
+            if ()
+        }
+        return user;
+    }
 }
