@@ -27,7 +27,7 @@ public class User {
     }
 
     public static boolean tryToRegistrate(String _login, String _password){
-
+        return false;
     }
 
     public static boolean isUnigueLogin(String _login){
@@ -51,6 +51,6 @@ public class User {
     }
 
     public double getMultiplier(){
-
+        return
     }
 }
