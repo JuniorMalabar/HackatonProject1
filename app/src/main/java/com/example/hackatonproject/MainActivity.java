@@ -2,6 +2,7 @@ package com.example.hackatonproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.TabActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -12,7 +13,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends TabActivity implements SensorEventListener {
 
     SensorManager sensorManager;
 
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         textView = findViewById(R.id.steps);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+        
+
+
+
     }
 
     @Override
