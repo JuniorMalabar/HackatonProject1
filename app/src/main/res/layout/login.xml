@@ -58,7 +58,6 @@
             android:layout_marginTop="20dp"
             android:background="#ffff00"
             android:text="Вход"
-            android:onClick="toRegistration"
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
