@@ -2,27 +2,33 @@ package com.example.hackatonproject;
 
 import android.content.Context;
 
-enum Test_type {
+enum Task_type {
     TASK_TYPE_STEPS_COUNT,
     TASK_TYPE_GO_TO_POINT
 }
 
-public class Task {
+enum Task_decision {
+    TASK_DECISION_NOT_DECIDED,
+    TASK_DECISION_DECLINED,
+    TASK_DECISION_ACCEPTED
+}
+
+public abstract class Task {
     private Integer id;
     private int type;
     private String value;
     private Integer ratingReward;
     private Integer pointsReward;
-    private boolean accepted;
+    private int decision;
     private static TaskDBHelper dbHelper;
 
-    public Task(int _id, int _type, String _value, Integer _ratingReward, Integer _pointsReward, boolean _accepted){
+    public Task(int _id, int _type, String _value, Integer _ratingReward, Integer _pointsReward, int _decision){
         id = _id;
         type = _type;
         value = _value;
         ratingReward = _ratingReward;
         pointsReward = _pointsReward;
-        accepted = _accepted;
+        decision = _decision;
     }
 
     public static void setDBHelper(Context context) {
@@ -45,5 +51,9 @@ public class Task {
         return pointsReward;
     }
 
-    public boolean isAccepted
+    public int getDecision(){
+        return decision;
+    }
+
+    public abstract void parseValueString();
 }

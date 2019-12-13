@@ -1,7 +1,5 @@
 package com.example.hackatonproject;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 
 public class User {
@@ -28,10 +26,8 @@ public class User {
         dbHelper = new UserDBHelper();
     }
 
-    public static User getUserByLoginPassword(String _login, String _password){
-        User user = null;
-        // Select from DB
-        return user;
+    public static boolean tryToRegistrate(String _login, String _password){
+
     }
 
     public static boolean isUnigueLogin(String _login){
@@ -52,5 +48,9 @@ public class User {
 
     public Integer getRating(){
         return rating;
+    }
+
+    public double getMultiplier(){
+
     }
 }
