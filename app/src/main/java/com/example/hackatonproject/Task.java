@@ -2,9 +2,13 @@ package com.example.hackatonproject;
 
 import android.content.Context;
 
+import java.util.Random;
+
 public abstract class Task {
-    public static int TASK_TYPE_STEPS_COUNT = 0;
-    public static int TASK_TYPE_GO_TO_POINT = 1;
+    public static final int TASK_TYPE_STEPS_COUNT = 0;
+    public static final int TASK_TYPE_GO_TO_POINT = 1;
+    public static final int TASK_TYPE_GO_TO_ROUTE = 2;
+    public static final int TASK_TYPE_COUNT = 3;
 
     private Integer id;
     private int type;
@@ -53,7 +57,16 @@ public abstract class Task {
     }
 
     public static Task generateTask(User user){
-        return null;
+        Random random = new Random();
+        int _type = random.nextInt(TASK_TYPE_COUNT);
+        switch (_type){
+            case TASK_TYPE_STEPS_COUNT:
+                break;
+            case TASK_TYPE_GO_TO_POINT:
+                break;
+            case TASK_TYPE_GO_TO_ROUTE:
+                break;
+        }
     }
 
     public void saveTask(){
