@@ -1,5 +1,10 @@
 package com.example.hackatonproject;
 
+enum Test_type {
+    TASK_TYPE_STEPS_COUNT,
+    TASK_TYPE_GO_TO_POINT
+}
+
 public class Task {
     public static final int TASK_TYPE_STEPS_COUNT = 0;
     public static final int TASK_TYPE_GO_TO_POINT = 1;
