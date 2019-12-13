@@ -31,6 +31,10 @@ public class User {
         return false; // на самом деле return запись_из_дб != null
     }
 
+    public static boolean tryToSignIn(String _login, String _password) {
+        return false;
+    }
+
     public Integer getPoints(){
         return points;
     }
