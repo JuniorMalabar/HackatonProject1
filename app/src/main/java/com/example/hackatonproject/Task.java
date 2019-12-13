@@ -2,18 +2,13 @@ package com.example.hackatonproject;
 
 import android.content.Context;
 
-enum Task_type {
-    TASK_TYPE_STEPS_COUNT,
-    TASK_TYPE_GO_TO_POINT
-}
-
-enum Task_decision {
-    TASK_DECISION_NOT_DECIDED,
-    TASK_DECISION_DECLINED,
-    TASK_DECISION_ACCEPTED
-}
-
 public abstract class Task {
+    public static int TASK_TYPE_STEPS_COUNT = 0;
+    public static int TASK_TYPE_GO_TO_POINT = 1;
+    public static int TASK_DECISION_NOT_DECIDED = 0;
+    public static int TASK_DECISION_DECLINED = 1;
+    public static int TASK_DECISION_ACCEPTED = 2;
+
     private Integer id;
     private int type;
     private String value;
@@ -22,10 +17,10 @@ public abstract class Task {
     private int decision;
     private static TaskDBHelper dbHelper;
 
-    public Task(int _id, int _type, String _value, Integer _ratingReward, Integer _pointsReward, int _decision){
+    public Task(int _id, int _type, Integer _ratingReward, Integer _pointsReward, int _decision){
         id = _id;
         type = _type;
-        value = _value;
+        value = null;
         ratingReward = _ratingReward;
         pointsReward = _pointsReward;
         decision = _decision;
