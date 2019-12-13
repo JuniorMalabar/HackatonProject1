@@ -1,5 +1,7 @@
 package com.example.hackatonproject;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class User {
@@ -22,8 +24,8 @@ public class User {
         //dbHelper.saveUser(user) or dbHelper.editUser(user);
     }
 
-    public void setDBHelper(UserDBHelper helper){
-        dbHelper = helper;
+    public void setDBHelper(){
+        dbHelper = new UserDBHelper();
     }
 
     public static User getUserByLoginPassword(String _login, String _password){
