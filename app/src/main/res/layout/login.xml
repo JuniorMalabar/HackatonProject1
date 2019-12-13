@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Login"
     android:background="#0000ff">
     <LinearLayout
         android:padding="20dp"
@@ -54,6 +54,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+        <Button
+            android:layout_marginTop="20dp"
+            android:background="#ffff00"
+            android:text="Регистрация"
+            android:onClick="toRegistration"
+            android:id="@+id/toReg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 
