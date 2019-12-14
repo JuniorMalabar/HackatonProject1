@@ -58,7 +58,24 @@ public class User {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         RequestAsync task = new RequestAsync(map);
-        String value= null;
+        String value = null;
+        try {
+            value = task.execute(query).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        HashMap<String, String> Usermap = gson.fromJson(value, HashMap.class);
+        if (Usermap == null) {
+            return null;
+        }
+
+        query = RequestAsync.Url + "GetHistoryOfThisOne.php";
+        map = new HashMap<String, String>();
+        map.put("id", Usermap.get("id"));
+        task = new RequestAsync(map);
+        value = null;
         try {
             value = task.execute(query).get();
         } catch (ExecutionException e) {
@@ -67,9 +84,7 @@ public class User {
             e.printStackTrace();
         }
         map = gson.fromJson(value, HashMap.class);
-
-        return new User(1, "Fedor", "Talisman", 0, null, 0); // DEBUG
-       // return new User(1, "Fedor", "Talisman", 0, null, 0); // DEBUG
+        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")),false); // DEBUG
     }
 
     public String getLogin() {
