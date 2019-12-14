@@ -71,6 +71,8 @@ public class TabsHost extends TabActivity {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         RecurringTasks recurringTasks = new RecurringTasks();
         recurringTasks.setRecurringTasks(this);
+
+        AppHelper.getInstance().initTracking(this);
     }
 
     public void logOut (View view){
