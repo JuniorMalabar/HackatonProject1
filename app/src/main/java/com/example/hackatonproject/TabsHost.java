@@ -23,12 +23,12 @@ public class TabsHost extends TabActivity {
         TabHost tabHost = getTabHost();
 
         // Вкладка Info
-        android.widget.TabHost.TabSpec infoTab = tabHost.newTabSpec("Info");
+        android.widget.TabHost.TabSpec historyTab = tabHost.newTabSpec("History");
         // устанавливаем заголовок и иконку
-        infoTab.setIndicator("Основная информация");
+        historyTab.setIndicator("История полученных бонусов");
         // устанавливаем окно, которая будет показываться во вкладке
-        Intent infoTabIntent = new Intent(this, MainActivity.class);
-        infoTab.setContent(infoTabIntent);
+        Intent historyTabIntent = new Intent(this, MainActivity.class);
+        historyTab.setContent(historyTabIntent);
 
         // Вкладка AllTasks
         android.widget.TabHost.TabSpec availableTasksTab = tabHost.newTabSpec("AllTasks");
@@ -60,10 +60,10 @@ public class TabsHost extends TabActivity {
         Intent settingsIntent = new Intent(this, Settings.class);
         settingsTab.setContent(settingsIntent);
 
-        // Добавляем вкладки в TabHost
-        tabHost.addTab(infoTab);
+        // Добавляем вкладки в
         tabHost.addTab(availableTasksTab);
         tabHost.addTab(acceptedTasksTab);
+        tabHost.addTab(historyTab);
         tabHost.addTab(shopTab);
         tabHost.addTab(leaderboardTab);
         tabHost.addTab(settingsTab);
