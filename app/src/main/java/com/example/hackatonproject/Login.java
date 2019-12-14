@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void toRegistration(View view){
-        Intent intent = new Intent(getApplicationContext(), Registration.class);
+        Intent intent = new Intent(getApplicationContext(), TabsHost.class);
         startActivity(intent);
     }
 
