@@ -21,7 +21,6 @@ public class Login extends AppCompatActivity {
         loginText = findViewById(R.id.login_login);
         passwordText = findViewById(R.id.login_password);
         Task.setDBHelper(this);
-
     }
 
     public void toRegistration(View view){

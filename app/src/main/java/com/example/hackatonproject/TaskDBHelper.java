@@ -16,7 +16,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null);");
+        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null, ratingReward integer not null, pointsReward integer not null, decision integer not null);");
     }
 
     @Override
@@ -30,10 +30,12 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         cv.put("value", value);
         cv.put("ratingReward", ratingReward);
         cv.put("pointsReward", pointsReward);
-        cv.put("decision", type);
+        cv.put("decision", decision);
         SQLiteDatabase db = getWritableDatabase();
         db.insert("tasks", null, cv);
+        db = getReadableDatabase();
         Cursor cursor = db.query("tasks", new String[] {"id"}, "type = ? and value = ? and ratingReward = ? and pointsReward = ? and decision = ?", new String[] {type.toString(), value, ratingReward.toString(), pointsReward.toString(), decision.toString()}, null, null, null);
+        cursor.moveToFirst();
         return cursor.getInt(cursor.getColumnIndex("id"));
     }
 
@@ -98,6 +100,6 @@ public class TaskDBHelper extends SQLiteOpenHelper {
     public void recreateTable() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("drop table if exists tasks");
-        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null);");
+        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null, ratingReward integer not null, pointsReward integer not null, decision integer not null);");
     }
 }
