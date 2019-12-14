@@ -1,6 +1,9 @@
 package com.example.hackatonproject;
 
+import java.util.ArrayList;
+
 public class Bonus {
+    private Integer id;
     private String organization;
     private String description;
     private String code;
@@ -11,5 +14,13 @@ public class Bonus {
         description = _description;
         code = _code;
         cost = _cost;
+    }
+
+    public static ArrayList<Bonus> getBonusesCatalog(){
+        return null; // На самом деле нужно сгенерить каталог бонусов из бд
+    }
+
+    public Integer getCost() {
+        return cost;
     }
 }

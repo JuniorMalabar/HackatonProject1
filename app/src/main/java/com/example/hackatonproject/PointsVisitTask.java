@@ -58,4 +58,8 @@ public class PointsVisitTask extends Task {
     public String getDescription() {
         return null;
     }
+
+    public ArrayList<Location> getLocations(){
+        return new ArrayList<Location>(locations);
+    }
 }

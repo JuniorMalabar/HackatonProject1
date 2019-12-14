@@ -63,4 +63,11 @@ public class User {
     public void giveRatingReward(Integer reward) {
         rating += reward;
     }
+
+    public boolean tryTopurchaseBonus(Bonus bonus){
+        if (points >= bonus.getCost()){
+            points -= bonus.getCost();
+        }
+        return false;
+    }
 }
