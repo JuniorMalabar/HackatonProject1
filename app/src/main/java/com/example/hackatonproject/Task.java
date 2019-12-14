@@ -10,13 +10,13 @@ public abstract class Task {
     public static final int TASK_TYPE_GO_TO_ROUTE = 2;
     public static final int TASK_TYPE_COUNT = 3;
 
-    private Integer id;
-    private int type;
-    private String value;
-    private Integer ratingReward;
-    private Integer pointsReward;
-    private boolean decision;
-    private static TaskDBHelper dbHelper;
+    protected Integer id;
+    protected Integer type;
+    protected String value;
+    protected Integer ratingReward;
+    protected Integer pointsReward;
+    protected boolean decision;
+    protected static TaskDBHelper dbHelper;
 
     public Task(int _id, int _type, Integer _ratingReward, Integer _pointsReward, boolean _decision){
         id = _id;
@@ -27,8 +27,20 @@ public abstract class Task {
         decision = _decision;
     }
 
+    public Task(int _type, Integer _ratingReward, Integer _pointsReward, boolean _decision){
+        type = _type;
+        value = null;
+        ratingReward = _ratingReward;
+        pointsReward = _pointsReward;
+        decision = _decision;
+    }
+
     public static void setDBHelper(Context context) {
         dbHelper = new TaskDBHelper(context);
+    }
+
+    public TaskDBHelper getDBHelper(){
+        return dbHelper;
     }
 
     public int getType() {
@@ -61,20 +73,19 @@ public abstract class Task {
         int _type = random.nextInt(TASK_TYPE_COUNT);
         switch (_type){
             case TASK_TYPE_STEPS_COUNT:
+                return new StepsCountTask.generate()
                 break;
             case TASK_TYPE_GO_TO_POINT:
                 break;
             case TASK_TYPE_GO_TO_ROUTE:
                 break;
+            default:
+                break;
         }
     }
 
     public void saveTask(){
-        dbHelper.insert(this);
-    }
-
-    public void setValueString(String valueString) {
-        value = valueString;
+        dbHelper.insert(type, value, ratingReward, pointsReward, decision ? 1 : 0);
     }
 
     public abstract void parseValueString();

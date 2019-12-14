@@ -1,8 +1,10 @@
 package com.example.hackatonproject;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 public class TaskDBHelper extends SQLiteOpenHelper {
 
@@ -20,7 +22,14 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists tasks");
     }
 
-    public void insert(Task task) {
-
+    public void insert(Integer type, String value, Integer ratingReward, Integer pointsReward, Integer decision) {
+        ContentValues cv = new ContentValues();
+        cv.put("type", type);
+        cv.put("value", value);
+        cv.put("ratingReward", ratingReward);
+        cv.put("pointsReward", pointsReward);
+        cv.put("decision", type);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert("tasks", null, cv);
     }
 }
