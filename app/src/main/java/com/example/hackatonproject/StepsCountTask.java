@@ -21,7 +21,7 @@ public class StepsCountTask extends Task {
         id = saveTask();
     }
 
-    public static ArrayList<StepsCountTask> getAllTasks() {
+    public static ArrayList<StepsCountTask> getAllStepsCountTasks() {
         return new ArrayList<>(dbHelper.getStepsCountTasks());
     }
 

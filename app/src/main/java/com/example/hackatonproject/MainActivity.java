@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Integer stepsPassed = sharedPreferences.getInt("stepsGone", -1);
             if (stepsPassed != -1) {
                 Integer diff = (int) event.values[0] - stepsPassed;
-                for(StepsCountTask task : StepsCountTask.getAllTasks()){
+                for(StepsCountTask task : StepsCountTask.getAllStepsCountTasks()){
                     task.progressCompletion(diff.toString());
                 }
                 SharedPreferences.Editor editor = sharedPreferences.edit();
