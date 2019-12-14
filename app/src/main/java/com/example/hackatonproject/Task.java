@@ -2,9 +2,12 @@ package com.example.hackatonproject;
 
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -77,7 +80,19 @@ public abstract class Task {
         user.giveRatingReward(ratingReward);
         user.givePointsReward(pointsReward);
         Context context = AppHelper.getInstance().getTabHostContext();
-        // диалоговое окно сюда
+        final AlertDialog.Builder alertbox = new AlertDialog.Builder(context);
+        alertbox.setTitle("Задание выполнено!");
+        String TextToast = "Задание " + getDescription() + " успешно выполнено!\n" + getPointsReward() + " очков начислено на ваш счёт!";
+        alertbox.setMessage(TextToast);
+
+        alertbox.setNeutralButton("Ок", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                arg0.cancel();
+            }
+        });
+
+        alertbox.show();
+
         dbHelper.delete(this);
     }
 
