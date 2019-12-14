@@ -20,8 +20,12 @@ public class Organization {
         Integer minDist = Integer.MAX_VALUE;
         Organization closestOrg = null;
         for (Organization org: organizations) {
-            if (org.distanceFromCurrentLocation() < minDist)
+            if (org.distanceFromCurrentLocation() < minDist){
+                minDist = org.distanceFromCurrentLocation();
+                closestOrg = org;
+            }
         }
+        return closestOrg;
     }
 
     public Integer getId(){
@@ -37,5 +41,6 @@ public class Organization {
     }
 
     public Integer distanceFromCurrentLocation() {
+        return
     }
 }

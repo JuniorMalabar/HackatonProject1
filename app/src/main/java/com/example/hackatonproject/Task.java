@@ -116,6 +116,6 @@ public abstract class Task {
 
     public abstract void parseValueString();
     public abstract void progressCompletion(String _value);
-    public abstract void getDescription();
+    public abstract String getDescription();
 }
 
