@@ -16,7 +16,7 @@ public class TabsHost extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_host);
         username = (TextView) findViewById(R.id.username);
-        username.setText( AppHelper.getInstance().getUser().getLogin());
+        username.setText( AppHelper.getInstance().getUser().getLogin() + "\nБаллы " +  AppHelper.getInstance().getUser().getPoints());
         TabHost tabHost = getTabHost();
 
         // Вкладка Info

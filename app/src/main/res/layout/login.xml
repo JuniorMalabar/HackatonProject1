@@ -7,7 +7,7 @@
     tools:context=".Login"
     android:background="@drawable/bg_test">
     <LinearLayout
-        android:background="#70000000"
+        android:background="@drawable/test"
         android:padding="20dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -18,6 +18,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
         <TextView
+            android:textColor="#ffffff"
             android:textSize="50sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
+                android:textColor="#ffffff"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 android:textSize="30sp"
@@ -34,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:textSize="20sp"
                 android:id="@+id/login_login"
                 android:minWidth="150dp"
                 android:layout_width="wrap_content"
@@ -43,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
+                android:textColor="#ffffff"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
                 android:textSize="30sp"
@@ -50,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:textSize="20sp"
                 android:inputType="textPassword"
                 android:id="@+id/login_password"
                 android:minWidth="150dp"
@@ -61,14 +66,14 @@
             android:text="Вход"
             android:onClick="signIn"
             android:id="@+id/login"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
         <Button
             android:layout_marginTop="20dp"
             android:text="Регистрация"
             android:onClick="toRegistration"
             android:id="@+id/toReg"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
 
     </LinearLayout>
