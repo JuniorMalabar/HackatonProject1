@@ -1,5 +1,7 @@
 package com.example.hackatonproject;
 
+import android.app.AlarmManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ public class Login extends AppCompatActivity {
         loginText = findViewById(R.id.login_login);
         passwordText = findViewById(R.id.login_password);
         Task.setDBHelper(this);
+
     }
 
     public void toRegistration(View view){

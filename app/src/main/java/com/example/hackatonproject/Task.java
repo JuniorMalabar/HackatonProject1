@@ -1,5 +1,6 @@
 package com.example.hackatonproject;
 
+import android.app.AlarmManager;
 import android.content.Context;
 import android.location.Location;
 
@@ -107,4 +108,6 @@ public abstract class Task {
 
     public abstract void parseValueString();
     public abstract void progressCompletion(String _value);
+
 }
+
