@@ -1,6 +1,7 @@
 package com.example.hackatonproject;
 
 import android.location.Location;
+import android.location.LocationManager;
 import android.location.LocationProvider;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,7 @@ public class PointsVisitTask extends Task {
             }
             lastFoundIndex = value.indexOf(");", index+1);
             String[] params = value.substring(index, lastFoundIndex).split(",");
-            Location location = new Location(LocationProvider.class.getName());
+            Location location = new Location(LocationManager.GPS_PROVIDER);
             location.setLatitude(Double.parseDouble(params[0]));
             location.setLongitude(Double.parseDouble(params[1]));
             locations.add(location);
