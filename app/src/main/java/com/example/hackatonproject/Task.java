@@ -44,6 +44,11 @@ public abstract class Task {
         dbHelper = new TaskDBHelper(context);
     }
 
+    public static ArrayList<Task> getAllTasks() {
+        // Запрос всех из бд
+        return null;
+    }
+
     public TaskDBHelper getDBHelper(){
         return dbHelper;
     }
