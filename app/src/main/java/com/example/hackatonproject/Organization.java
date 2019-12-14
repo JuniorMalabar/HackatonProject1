@@ -41,6 +41,6 @@ public class Organization {
     }
 
     public Integer distanceFromCurrentLocation() {
-        return
+        return Math.round(location.distanceTo(AppHelper.getInstance().getLocation()));
     }
 }
