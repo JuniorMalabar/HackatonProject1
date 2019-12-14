@@ -10,26 +10,27 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-
-    SensorManager sensorManager;
-
-    boolean running = false;
-
-    TextView textView;
+    private SensorManager sensorManager;
+    private boolean running = false;
+    private ListView listView;
+    private ArrayList<Bonus> bonuses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        textView = findViewById(R.id.steps);
-
+        bonuses = new ArrayList<>(AppHelper.getInstance().getUser().getHistory().getBonuses());
+        listView = findViewById(R.id.bonusesList);
+        BonusesAdapter adapter = new BonusesAdapter(this, bonuses);
+        listView.setAdapter(adapter);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
     }
 
     @Override
@@ -59,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (running) {
-            textView.setText(String.valueOf(event.values[0]));
-
             SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
             Integer stepsPassed = sharedPreferences.getInt("stepsGone", -1);
             if (stepsPassed != -1) {

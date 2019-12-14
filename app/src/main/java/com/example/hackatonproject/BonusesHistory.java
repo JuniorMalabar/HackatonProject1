@@ -14,4 +14,8 @@ public class BonusesHistory {
     public void addBonus(Bonus bonus) {
         // добавление в бд
     }
+
+    public ArrayList<Bonus> getBonuses() {
+        return bonuses;
+    }
 }

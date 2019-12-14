@@ -24,6 +24,17 @@ public class Bonus {
         return cost;
     }
 
-    // нужен метод для внесения бонуса
+    public String getOrganization() {
+        return organization;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
     // нужен метод для удаления бонуса
 }
