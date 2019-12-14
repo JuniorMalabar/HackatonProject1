@@ -10,10 +10,6 @@ public class StepsCountTask extends Task {
         saveTask();
     }
 
-    public static void generateNew(Integer _ratingReward, Integer _pointsReward, Integer _steps){
-
-    }
-
     @Override
     public void parseValueString() {
 

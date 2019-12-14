@@ -73,8 +73,8 @@ public abstract class Task {
         int _type = random.nextInt(TASK_TYPE_COUNT);
         switch (_type){
             case TASK_TYPE_STEPS_COUNT:
-                return new StepsCountTask.generate()
-                break;
+                int steps = random.nextInt(5001) + 5000;
+                return new StepsCountTask(steps / 10, steps / 50, false, steps);
             case TASK_TYPE_GO_TO_POINT:
                 break;
             case TASK_TYPE_GO_TO_ROUTE:
@@ -82,10 +82,11 @@ public abstract class Task {
             default:
                 break;
         }
+        return null;
     }
 
-    public void saveTask(){
-        dbHelper.insert(type, value, ratingReward, pointsReward, decision ? 1 : 0);
+    public Integer saveTask(){
+        return dbHelper.insert(type, value, ratingReward, pointsReward, decision ? 1 : 0);
     }
 
     public abstract void parseValueString();
