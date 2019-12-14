@@ -25,6 +25,7 @@ public class TasksAdapter extends BaseAdapter {
         this.context = context;
         this.tasks = new ArrayList<>(tasks);
         this.allTasks = allTasks;
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
