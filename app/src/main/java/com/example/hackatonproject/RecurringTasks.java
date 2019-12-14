@@ -14,7 +14,7 @@ public class RecurringTasks extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        // тут очистка существующего списка заданий и генерация нового
+        Task.regenerate();
         Toast.makeText(context, "Fedor", Toast.LENGTH_LONG).show(); //тест
     }
 

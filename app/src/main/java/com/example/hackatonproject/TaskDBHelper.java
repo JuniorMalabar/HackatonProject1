@@ -94,4 +94,10 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         }
         return tasks;
     }
+
+    public void recreateTable() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("drop table if exists tasks");
+        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null);");
+    }
 }

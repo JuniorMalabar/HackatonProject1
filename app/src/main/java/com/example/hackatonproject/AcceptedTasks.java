@@ -8,9 +8,8 @@ import android.widget.ListView;
 
 
 public class AcceptedTasks extends ListActivity {
+    private ListView listView;
 
-    ListView listView;
-    LinearLayout ll;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
