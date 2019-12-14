@@ -32,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:textSize="20sp"
                 android:id="@+id/reg_login"
                 android:minWidth="150dp"
                 android:layout_width="wrap_content"
@@ -48,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:textSize="20sp"
                 android:inputType="textPassword"
                 android:id="@+id/reg_password"
                 android:minWidth="150dp"

@@ -16,7 +16,7 @@ public class TabsHost extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_host);
         username = (TextView) findViewById(R.id.username);
-        username.setText( AppHelper.getInstance().getUser().getLogin());
+        username.setText( AppHelper.getInstance().getUser().getLogin() + "\nБаллы " +  AppHelper.getInstance().getUser().getPoints());
         TabHost tabHost = getTabHost();
 
         // Вкладка Info
@@ -51,12 +51,19 @@ public class TabsHost extends TabActivity {
         Intent leaderboardIntent = new Intent(this, Leaderboard.class);
         leaderboardTab.setContent(leaderboardIntent);
 
+        // Вкладка Settings
+        android.widget.TabHost.TabSpec settingsTab = tabHost.newTabSpec("Settings");
+        settingsTab.setIndicator("Настройки");
+        Intent settingsIntent = new Intent(this, Settings.class);
+        settingsTab.setContent(settingsIntent);
+
         // Добавляем вкладки в TabHost
         tabHost.addTab(infoTab);
         tabHost.addTab(availableTasksTab);
         tabHost.addTab(acceptedTasksTab);
         tabHost.addTab(shopTab);
         tabHost.addTab(leaderboardTab);
+        tabHost.addTab(settingsTab);
 
 
         }
