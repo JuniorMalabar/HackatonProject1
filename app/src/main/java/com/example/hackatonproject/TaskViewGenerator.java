@@ -1,6 +1,7 @@
 package com.example.hackatonproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
@@ -12,15 +13,14 @@ public class TaskViewGenerator {
 
     public TaskViewGenerator(){}
 
-    public LinearLayout generateTaskView(Context context, final Task task){
-        LinearLayout taskView = new LinearLayout(context);
+    public LinearLayout generateTaskView(final Context context, final Task task){
+        final LinearLayout taskView = new LinearLayout(context);
         taskView.setGravity(Gravity.CENTER);
-
 
         TextView description = new TextView(context);
         description.setText(task.getDescription());
 
-        Button decline = new Button(context);
+        final Button decline = new Button(context);
         decline.setText("✗");
         decline.setTextColor(Color.RED);
         View.OnClickListener declineListner = new View.OnClickListener() {
@@ -41,6 +41,22 @@ public class TaskViewGenerator {
             }
         };
         decline.setOnClickListener(acceptListner);
+        if (task.type == Task.TASK_TYPE_GO_TO_POINT || task.type == Task.TASK_TYPE_GO_TO_ROUTE){
+            Button showMap = new Button(context);
+            View.OnClickListener mapConnector = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("type",task.type);
+                    intent.putExtra("value",task.value);
+                    context.startActivity(intent);
+                }
+            };
+            showMap.setOnClickListener(mapConnector);
+
+            taskView.addView(showMap);
+        }
+
 
         taskView.addView(accept);
         taskView.addView(decline);
