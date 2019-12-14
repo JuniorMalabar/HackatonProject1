@@ -60,4 +60,38 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         }
         return tasks;
     }
+
+    public ArrayList<PointsVisitTask> getPointsTasks() {
+        ArrayList<PointsVisitTask> tasks = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Integer type1 = Task.TASK_TYPE_GO_TO_POINT;
+        Integer type2 = Task.TASK_TYPE_GO_TO_ROUTE;
+        Cursor cursor = db.query("tasks", new String[] {"id", "type", "value", "ratingReward", "pointsReward", "decision"}, "type = ? or type = ?", new String[] {type1.toString(), type2.toString()}, null, null, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String value = cursor.getString(cursor.getColumnIndex("value"));
+                int type = cursor.getInt(cursor.getColumnIndex("type"));
+                int ratingReward = cursor.getInt(cursor.getColumnIndex("ratingReward"));
+                int pointsReward = cursor.getInt(cursor.getColumnIndex("pointsReward"));
+                boolean decision = cursor.getInt(cursor.getColumnIndex("decision")) == 1;
+                tasks.add(new PointsVisitTask(id, type, value, ratingReward, pointsReward, decision));
+            }
+        }
+        return tasks;
+    }
+
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<StepsCountTask> stepsCountTasks = new ArrayList<>(getStepsCountTasks());
+        ArrayList<PointsVisitTask> pointsVisitTasks = new ArrayList<>(getPointsTasks());
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (StepsCountTask task : stepsCountTasks) {
+            tasks.add(task);
+        }
+        for (PointsVisitTask task : pointsVisitTasks) {
+            tasks.add(task);
+        }
+        return tasks;
+    }
 }

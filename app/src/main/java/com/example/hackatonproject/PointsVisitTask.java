@@ -10,10 +10,18 @@ import java.util.ArrayList;
 
 public class PointsVisitTask extends Task {
     private ArrayList<Location> locations;
+
     public PointsVisitTask(int _type,  String _value){
         super(_type, 0, 0,  false);
         locations = new ArrayList<>();
         value = _value;
+    }
+
+    public PointsVisitTask(Integer _id, Integer _type, String _value, Integer _ratingReward, Integer _pointsReward, boolean _decision){
+        super(_type, _ratingReward, _pointsReward,  _decision);
+        value = _value;
+        parseValueString();
+        id = _id;
     }
 
     public PointsVisitTask(int _type, Integer _ratingReward, Integer _pointsReward, boolean _decision, ArrayList<Location> _locations){
@@ -23,9 +31,8 @@ public class PointsVisitTask extends Task {
         id = saveTask();
     }
 
-    public static ArrayList<PointsVisitTask> getAllPointsTask() {
-        // берем из бд
-        return null;
+    public static ArrayList<PointsVisitTask> getAllPointsTasks() {
+        return new ArrayList<>(dbHelper.getPointsTasks());
     }
 
     @NonNull

@@ -35,7 +35,7 @@ public class AppHelper {
             @Override
             public void onLocationChanged(Location location) {
                 AppHelper.getInstance().setLocation(location);
-                for (PointsVisitTask task : PointsVisitTask.getAllPointsTask()){
+                for (PointsVisitTask task : PointsVisitTask.getAllPointsTasks()){
                     task.progressCompletion("");
                 }
             }
