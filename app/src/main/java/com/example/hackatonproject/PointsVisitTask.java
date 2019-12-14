@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 public class PointsVisitTask extends Task {
     private ArrayList<Location> locations;
+    public PointsVisitTask(int _type,  String _value){
+        super(_type, 0, 0,  false);
+        locations = new ArrayList<>();
+        value = _value;
+    }
 
     public PointsVisitTask(int _type, Integer _ratingReward, Integer _pointsReward, boolean _decision, ArrayList<Location> _locations){
         super(_type, _ratingReward, _pointsReward,  _decision);

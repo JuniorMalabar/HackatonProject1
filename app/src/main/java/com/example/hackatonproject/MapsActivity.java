@@ -32,9 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle arguments = getIntent().getExtras();
         int type = arguments.getInt("type");
         String value = arguments.getString("value");
-        ArrayList<Location> list = new ArrayList<>();
-        list.add(AppHelper.getInstance().getLocation());
-        PointsVisitTask task = new PointsVisitTask(type, null, null, true, list);
+        PointsVisitTask task = new PointsVisitTask(type, value);
         task.parseValueString();
         lngs = new ArrayList<>();
         for (Location location: task.getLocations()) {
