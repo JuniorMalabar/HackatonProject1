@@ -1,9 +1,11 @@
 package com.example.hackatonproject;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Registration extends AppCompatActivity {
     private EditText loginText;
     private EditText passwordText;
+    private TextView errorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,7 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.registration);
         loginText = findViewById(R.id.reg_login);
         passwordText = findViewById(R.id.reg_password);
+        errorMsg = findViewById(R.id.errorMsg);
     }
 
     public void register(View view) {
@@ -29,11 +33,12 @@ public class Registration extends AppCompatActivity {
             return;
         }
         if (User.tryToRegister(login, password)){
+            errorMsg.setVisibility(View.GONE);
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
         }
         else{
-            Toast.makeText(this, "Такой пользователь уже существует! Выберите другой логин!", Toast.LENGTH_SHORT).show();
+            errorMsg.setVisibility(View.VISIBLE);
         }
     }
 }
