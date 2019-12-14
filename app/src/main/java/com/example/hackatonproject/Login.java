@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,16 +22,25 @@ public class Login extends AppCompatActivity {
     }
 
     public void toRegistration(View view){
-        Intent intent = new Intent(getApplicationContext(), TabsHost.class);
+        Intent intent = new Intent(getApplicationContext(), Registration.class);
         startActivity(intent);
     }
 
     public void signIn(View view) {
         String login = loginText.getText().toString();
         String password = passwordText.getText().toString();
-        if (User.tryToSignIn(login, password)){
-            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+        if (login.isEmpty() || password.isEmpty()){
+            Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        User user = User.tryToSignIn(login, password);
+        if (user != null){
+            AppHelper.getInstance().setUser(user);
+            Intent intent = new Intent(getApplicationContext(), TabsHost.class);
             startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "Неверно введены логин/пароль!", Toast.LENGTH_SHORT).show();
         }
     }
 }
