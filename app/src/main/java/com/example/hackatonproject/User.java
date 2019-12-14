@@ -67,6 +67,9 @@ public class User {
     public boolean tryTopurchaseBonus(Bonus bonus){
         if (points >= bonus.getCost()){
             points -= bonus.getCost();
+            history.addBonus(bonus);
+            // Сохранить изменения в бд
+            return true;
         }
         return false;
     }

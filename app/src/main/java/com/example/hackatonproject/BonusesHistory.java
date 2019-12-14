@@ -10,4 +10,8 @@ public class BonusesHistory {
         userId = _userId;
         bonuses = new ArrayList<>(_bonuses);
     }
+
+    public void addBonus(Bonus bonus) {
+        // добавление в бд
+    }
 }

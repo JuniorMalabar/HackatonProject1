@@ -43,4 +43,6 @@ public class Organization {
     public Integer distanceFromCurrentLocation() {
         return Math.round(location.distanceTo(AppHelper.getInstance().getLocation()));
     }
+
+    // метод для сейва в бд
 }
