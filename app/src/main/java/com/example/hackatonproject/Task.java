@@ -1,5 +1,6 @@
 package com.example.hackatonproject;
 
+import android.app.AlarmManager;
 import android.content.Context;
 
 import java.util.Random;
@@ -93,4 +94,6 @@ public abstract class Task {
 
     public abstract void parseValueString();
     public abstract void progressCompletion(String _value);
+
 }
+

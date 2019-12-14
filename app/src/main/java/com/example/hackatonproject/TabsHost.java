@@ -1,6 +1,8 @@
 package com.example.hackatonproject;
 
+import android.app.AlarmManager;
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 public class TabsHost extends TabActivity {
 
     public TextView username;
+    public AlarmManager manager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class TabsHost extends TabActivity {
         tabHost.addTab(leaderboardTab);
         tabHost.addTab(settingsTab);
 
-
+        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         }
 
     public void logOut (View view){
