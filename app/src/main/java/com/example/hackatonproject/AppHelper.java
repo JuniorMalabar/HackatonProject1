@@ -19,11 +19,13 @@ public class AppHelper {
     private LocationListener listener;
     private LocationManager manager;
     private Context tabHostContext;
+    private Integer place;
 
     public AppHelper(){
         user = null;
         location = null;
         tabHostContext = null;
+        place = null;
     }
 
     public void setUser(User user) {
@@ -81,5 +83,13 @@ public class AppHelper {
             helper = new AppHelper();
         }
         return helper;
+    }
+
+    public Integer getUserPlace() {
+        return place;
+    }
+
+    public void setUserPlace(Integer place) {
+        this.place = place;
     }
 }
