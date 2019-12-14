@@ -1,7 +1,9 @@
 package com.example.hackatonproject;
 
 import android.content.Context;
+import android.location.Location;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Task {
@@ -70,14 +72,25 @@ public abstract class Task {
         dbHelper.delete(this);
     }
 
-    public static Task generateTask(User user){
+    public static Task generateTask(){
         Random random = new Random();
         int _type = random.nextInt(TASK_TYPE_COUNT);
         switch (_type){
             case TASK_TYPE_STEPS_COUNT:
                 int steps = random.nextInt(5001) + 5000;
-                return new StepsCountTask(steps / 10, steps / 50, false, steps);
+                return new StepsCountTask(steps / 10, (int) Math.round(steps * AppHelper.getInstance().getUser().getMultiplier() / 50), false, steps);
             case TASK_TYPE_GO_TO_POINT:
+                int probability = random.nextInt(100);
+                if (probability < 25){
+                    Organization organization = Organization.getClosestPoint();
+                    ArrayList<Location> list = new ArrayList<>();
+                    list.add(organization.getLocation());
+                    Integer distance = organization.distanceFromCurrentLocation();
+                    return new PointsVisitTask(_type, distance / 20, (int) Math.round(distance * AppHelper.getInstance().getUser().getMultiplier() / 100), false, list);
+                }
+                else{
+                    return new PointsVisitTask()
+                }
                 break;
             case TASK_TYPE_GO_TO_ROUTE:
                 break;

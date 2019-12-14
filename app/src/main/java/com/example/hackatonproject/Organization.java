@@ -13,6 +13,9 @@ public class Organization {
         location = _location;
     }
 
+    public static Organization getClosestPoint() {
+    }
+
     public Integer getId(){
         return id;
     }
@@ -23,5 +26,8 @@ public class Organization {
 
     public Location getLocation(){
         return location;
+    }
+
+    public Integer distanceFromCurrentLocation() {
     }
 }
