@@ -53,4 +53,9 @@ public class PointsVisitTask extends Task {
     public void progressCompletion(String _value) {
 
     }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
 }

@@ -43,4 +43,9 @@ public class StepsCountTask extends Task {
             finishCompletion();
         }
     }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
 }
