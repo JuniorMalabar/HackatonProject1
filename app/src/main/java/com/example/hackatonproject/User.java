@@ -20,15 +20,16 @@ public class User {
         points = _points;
         history = _history;
         rating = _rating;
-        //dbHelper.saveUser(user) or dbHelper.editUser(user);
     }
 
-    public static boolean tryToRegistrate(String _login, String _password){
+    public static boolean tryToRegister(String _login, String _password){
+        // если логин уникален, то пишем в бд и возвращаем true, иначе false
         return false;
     }
 
-    public static boolean tryToSignIn(String _login, String _password) {
-        return false;
+    public static User tryToSignIn(String _login, String _password) {
+        // если связка логин/пароль верна, то возвращаем объект юзера, иначе null
+        return null;
     }
 
     public Integer getPoints(){

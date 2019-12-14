@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +24,16 @@ public class Registration extends AppCompatActivity {
     public void register(View view) {
         String login = loginText.getText().toString();
         String password = passwordText.getText().toString();
-        if (User.tryToRegistrate(login, password)){
+        if (login.isEmpty() || password.isEmpty()){
+            Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (User.tryToRegister(login, password)){
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "Такой пользователь уже существует! Выберите другой логин!", Toast.LENGTH_SHORT).show();
         }
     }
 }
