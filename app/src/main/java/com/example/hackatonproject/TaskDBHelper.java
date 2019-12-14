@@ -20,5 +20,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists tasks");
     }
 
+    public void insert(Task task) {
 
+    }
 }

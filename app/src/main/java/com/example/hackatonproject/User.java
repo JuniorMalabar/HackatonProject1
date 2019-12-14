@@ -27,10 +27,6 @@ public class User {
         return false;
     }
 
-    public static boolean isUnigueLogin(String _login){
-        return false; // на самом деле return запись_из_дб != null
-    }
-
     public static boolean tryToSignIn(String _login, String _password) {
         return false;
     }
@@ -53,5 +49,13 @@ public class User {
 
     public double getMultiplier(){
         return 0.25*exp(-rating/1000.0) + 0.75;
+    }
+
+    public void givePointsReward(double reward) {
+        points += (int)reward;
+    }
+
+    public void giveRatingReward(Integer reward) {
+        rating += reward;
     }
 }
