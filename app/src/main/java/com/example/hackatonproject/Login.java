@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
+
 public class Login extends AppCompatActivity {
     private EditText loginText;
     private EditText passwordText;
@@ -18,10 +21,11 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        loginText = findViewById(R.id.login_login);
-        passwordText = findViewById(R.id.login_password);
+
         Task.setDBHelper(this);
 
+        loginText = findViewById(R.id.login_login);
+        passwordText = findViewById(R.id.login_password);
     }
 
     public void toRegistration(View view){
