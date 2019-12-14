@@ -89,6 +89,7 @@ public abstract class Task {
                     return new PointsVisitTask(_type, distance / 20, (int) Math.round(distance * AppHelper.getInstance().getUser().getMultiplier() / 100), false, list);
                 }
                 else{
+
                     return new PointsVisitTask()
                 }
                 break;
