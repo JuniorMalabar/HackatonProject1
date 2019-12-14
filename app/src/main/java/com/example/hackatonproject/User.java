@@ -33,6 +33,14 @@ public class User {
         return new User(1, "Fedor", "Talisman", 0, null, 0,false); // DEBUG
     }
 
+    public static ArrayList<User> getUsersByRating() {
+        // Нужно получить всех юзеров сортированных ПО УБЫВАНИЮ рейтигна из бд
+        // Нужно найти, по какому индексу в полученном массиве находится AppData.getInstance().getUser()
+        // Сделать AppData.getInstance().setUserPlace(найденный_индекс + 1)
+        // Вернуть массив из первых 10 юзеров + самого юзера (AppHelper.getInstance().getUser()), т.е. в ответе 11 элементов
+        return null;
+    }
+
     public String getLogin() {
         return login;
     }
