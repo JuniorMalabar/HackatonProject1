@@ -106,8 +106,16 @@ public abstract class Task {
         return dbHelper.insert(type, value, ratingReward, pointsReward, decision ? 1 : 0);
     }
 
+    public void declineTask(){
+
+    }
+
+    public void acceptTask(){
+
+    }
+
     public abstract void parseValueString();
     public abstract void progressCompletion(String _value);
-
+    public abstract void getDescription();
 }
 
