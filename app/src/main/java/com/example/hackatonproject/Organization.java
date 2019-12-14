@@ -14,6 +14,7 @@ public class Organization {
     }
 
     public static Organization getClosestPoint() {
+        return null;
     }
 
     public Integer getId(){
@@ -29,5 +30,6 @@ public class Organization {
     }
 
     public Integer distanceFromCurrentLocation() {
+        return null;
     }
 }
