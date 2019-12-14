@@ -1,5 +1,7 @@
 package com.example.hackatonproject;
 
+import androidx.annotation.NonNull;
+
 public class StepsCountTask extends Task {
     private Integer stepsLeft;
 
@@ -7,11 +9,17 @@ public class StepsCountTask extends Task {
         super(Task.TASK_TYPE_STEPS_COUNT, _ratingReward, _pointsReward,  _decision);
         stepsLeft = _steps;
         value = toString();
-        saveTask();
+        id = saveTask();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return stepsLeft.toString();
     }
 
     @Override
     public void parseValueString() {
-
+        stepsLeft = Integer.parseInt(value);
     }
 }
