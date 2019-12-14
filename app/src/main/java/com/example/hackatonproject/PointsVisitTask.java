@@ -23,6 +23,11 @@ public class PointsVisitTask extends Task {
         id = saveTask();
     }
 
+    public static ArrayList<PointsVisitTask> getAllPointsTask() {
+        // берем из бд
+        return null;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -56,12 +61,26 @@ public class PointsVisitTask extends Task {
 
     @Override
     public void progressCompletion(String _value) {
-
+        for (Location location : locations) {
+            if (location.distanceTo(AppHelper.getInstance().getLocation()) < 10){
+                locations.remove(location);
+            }
+        }
+        if (locations.size() == 0){
+            finishCompletion();
+        }
     }
 
     @Override
     public String getDescription() {
-        return null;
+        String description = "";
+        if (type == TASK_TYPE_GO_TO_POINT){
+            description = "Посетите заданную точку";
+        }
+        else{
+            description = "Посетите все заданные точки";
+        }
+        return description;
     }
 
     public ArrayList<Location> getLocations(){

@@ -73,6 +73,7 @@ public class TabsHost extends TabActivity {
         recurringTasks.setRecurringTasks(this);
 
         AppHelper.getInstance().initTracking(this);
+        AppHelper.getInstance().setTabHostContext(this);
     }
 
     public void logOut (View view){

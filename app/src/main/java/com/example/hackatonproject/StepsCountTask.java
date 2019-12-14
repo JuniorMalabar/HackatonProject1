@@ -46,6 +46,6 @@ public class StepsCountTask extends Task {
 
     @Override
     public String getDescription() {
-        return null;
+        return "Пройти шагов: " + stepsLeft.toString();
     }
 }

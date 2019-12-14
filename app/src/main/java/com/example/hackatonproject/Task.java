@@ -77,6 +77,8 @@ public abstract class Task {
         User user = AppHelper.getInstance().getUser();
         user.giveRatingReward(ratingReward);
         user.givePointsReward(pointsReward);
+        Context context = AppHelper.getInstance().getTabHostContext();
+        // диалоговое окно сюда
         dbHelper.delete(this);
     }
 
