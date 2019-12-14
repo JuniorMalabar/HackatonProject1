@@ -10,7 +10,6 @@ public class User {
     private String password;
     private Integer points;
     private BonusesHistory history;
-    //private ArrayList<Task> tasks;
     private Integer rating; // Хранятся ОЧКИ рейтинга
     private boolean studentMode;
 
