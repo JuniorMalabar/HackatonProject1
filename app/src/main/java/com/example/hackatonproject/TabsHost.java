@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 public class TabsHost extends TabActivity {
+
+    public TextView username;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_host);
-
+        username = (TextView) findViewById(R.id.username);
+        username.setText( AppHelper.getInstance().getUser().getLogin());
         TabHost tabHost = getTabHost();
 
         // Вкладка Info
