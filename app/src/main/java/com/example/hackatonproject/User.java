@@ -64,7 +64,7 @@ public class User {
         rating += reward;
     }
 
-    public boolean tryTopurchaseBonus(Bonus bonus){
+    public boolean tryToPurchaseBonus(Bonus bonus){
         if (points >= bonus.getCost()){
             points -= bonus.getCost();
             history.addBonus(bonus);
