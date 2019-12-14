@@ -3,6 +3,7 @@ package com.example.hackatonproject;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TabHost;
 
 public class TabsHost extends TabActivity {
@@ -52,6 +53,13 @@ public class TabsHost extends TabActivity {
         tabHost.addTab(acceptedTasksTab);
         tabHost.addTab(shopTab);
         tabHost.addTab(leaderboardTab);
+
+
+        }
+
+    public void logOut (View view){
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+        startActivity(intent);
     }
 }
 
