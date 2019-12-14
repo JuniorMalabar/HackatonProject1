@@ -23,4 +23,7 @@ public class Bonus {
     public Integer getCost() {
         return cost;
     }
+
+    // нужен метод для внесения бонуса
+    // нужен метод для удаления бонуса
 }
