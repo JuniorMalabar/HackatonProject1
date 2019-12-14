@@ -13,13 +13,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class AvailableTasksAdapter extends BaseAdapter {
+public class TasksAdapter extends BaseAdapter {
     private Context context;
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
+    private boolean allTasks;
 
-    public AvailableTasksAdapter(Context context, ArrayList<Task> tasks) {
+    public TasksAdapter(Context context, ArrayList<Task> tasks, boolean allTasks) {
         this.context = context;
         this.tasks = new ArrayList<>(tasks);
+        this.allTasks = allTasks;
     }
 
     @Override
