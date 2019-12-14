@@ -10,6 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
@@ -26,9 +33,10 @@ public class Login extends AppCompatActivity {
 
         loginText = findViewById(R.id.login_login);
         passwordText = findViewById(R.id.login_password);
+
     }
 
-    public void toRegistration(View view){
+    public void toRegistration(View view) {
         Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
         startActivity(intent);
     }
@@ -36,17 +44,16 @@ public class Login extends AppCompatActivity {
     public void signIn(View view) {
         String login = loginText.getText().toString();
         String password = passwordText.getText().toString();
-        if (login.isEmpty() || password.isEmpty()){
+        if (login.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_SHORT).show();
             return;
         }
         User user = User.tryToSignIn(login, password);
-        if (user != null){
+        if (user != null) {
             AppHelper.getInstance().setUser(user);
             Intent intent = new Intent(getApplicationContext(), TabsHost.class);
             startActivity(intent);
-        }
-        else{
+        } else {
             Toast.makeText(this, "Неверно введены логин/пароль!", Toast.LENGTH_SHORT).show();
         }
     }
