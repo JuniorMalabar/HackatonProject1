@@ -3,6 +3,7 @@ package com.example.hackatonproject;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Organization {
     private Integer id;
@@ -26,6 +27,12 @@ public class Organization {
             }
         }
         return closestOrg;
+    }
+
+    public static Organization getRandomPoint() {
+        ArrayList<Organization> organizations = new ArrayList<>(); // по факту - собрать с бд все организации
+        Random random = new Random();
+        return organizations.get(random.nextInt(organizations.size()));
     }
 
     public Integer getId(){
