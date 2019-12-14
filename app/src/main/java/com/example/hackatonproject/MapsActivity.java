@@ -2,7 +2,9 @@ package com.example.hackatonproject;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,5 +36,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Sydney2"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
+    }
+
+    public void closeMap(View view){
+        finish();
     }
 }
