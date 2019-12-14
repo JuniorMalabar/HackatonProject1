@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void toRegistration(View view){
-        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), Registration.class);
         startActivity(intent);
     }
 
