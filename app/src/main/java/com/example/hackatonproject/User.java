@@ -30,7 +30,7 @@ public class User {
 
     public static User tryToSignIn(String _login, String _password) {
         // если связка логин/пароль верна, то возвращаем объект юзера, иначе null
-        return null;//new User(1, "Fedor", "Talisman", 0, null, 0); // DEBUG
+        return new User(1, "Fedor", "Talisman", 0, null, 0,false); // DEBUG
     }
 
     public String getLogin() {
