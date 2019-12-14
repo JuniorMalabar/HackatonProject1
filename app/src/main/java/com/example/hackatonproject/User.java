@@ -10,7 +10,7 @@ public class User {
     private String password;
     private Integer points;
     private BonusesHistory history;
-    private ArrayList<Task> tasks;
+    //private ArrayList<Task> tasks;
     private Integer rating; // Хранятся ОЧКИ рейтинга
 
     public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history, Integer _rating) {
@@ -40,9 +40,9 @@ public class User {
         return points;
     }
 
-    public ArrayList<Task> getTasks(){
-        return new ArrayList<>(tasks);
-    }
+    //public ArrayList<Task> getTasks(){
+        //return new ArrayList<>(tasks);
+    //}
 
     public BonusesHistory getHistory(){
         return history;

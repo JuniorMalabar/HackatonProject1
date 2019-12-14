@@ -2,6 +2,8 @@ package com.example.hackatonproject;
 
 import android.app.AlarmManager;
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 
 public class AppHelper {
     private User user;
