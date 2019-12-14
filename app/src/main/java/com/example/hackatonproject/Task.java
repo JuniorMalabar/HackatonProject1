@@ -91,9 +91,9 @@ public abstract class Task {
                 }
                 else{
 
-                    return new PointsVisitTask()
+                    return null;//new PointsVisitTask()
                 }
-                break;
+                //break;
             case TASK_TYPE_GO_TO_ROUTE:
                 break;
             default:

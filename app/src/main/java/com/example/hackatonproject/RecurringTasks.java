@@ -32,11 +32,11 @@ public class RecurringTasks extends BroadcastReceiver
         am.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
     }
 
-    public void cancelRecurringTasks(Context context)
-    {
-        Intent intent = new Intent(context, RecurringTasks.class);
-        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(sender);
-    }
+//    public void cancelRecurringTasks(Context context)
+//    {
+//        Intent intent = new Intent(context, RecurringTasks.class);
+//        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.cancel(sender);
+//    }
 }
