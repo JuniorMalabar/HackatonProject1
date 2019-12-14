@@ -56,17 +56,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 //
 //    }
 
-
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (running) {
             textView.setText(String.valueOf(event.values[0]));
 
             SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-            int stepsPassed = sharedPreferences.getInt("stepsGone", -1);
+            Integer stepsPassed = sharedPreferences.getInt("stepsGone", -1);
             if (stepsPassed != -1) {
-                int diff = (int) event.values[0] - stepsPassed;
-                //убавление разницы у тасков
+                Integer diff = (int) event.values[0] - stepsPassed;
+                for(StepsCountTask task : StepsCountTask.getAllTasks()){
+                    task.progressCompletion(diff.toString());
+                }
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.putInt("stepsGone", (int) event.values[0]);

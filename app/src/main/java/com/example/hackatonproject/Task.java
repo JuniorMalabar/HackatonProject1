@@ -18,10 +18,10 @@ public abstract class Task {
     protected boolean decision;
     protected static TaskDBHelper dbHelper;
 
-    public Task(int _id, int _type, Integer _ratingReward, Integer _pointsReward, boolean _decision){
+    public Task(int _id, int _type, String _value, Integer _ratingReward, Integer _pointsReward, boolean _decision){
         id = _id;
         type = _type;
-        value = null;
+        value = _value;
         ratingReward = _ratingReward;
         pointsReward = _pointsReward;
         decision = _decision;
@@ -63,9 +63,11 @@ public abstract class Task {
         return decision;
     }
 
-    public void finishCompletion(User user){
+    public void finishCompletion(){
+        User user = AppHelper.getInstance().getUser();
         user.giveRatingReward(ratingReward);
         user.givePointsReward(pointsReward);
+        dbHelper.delete(this);
     }
 
     public static Task generateTask(User user){
@@ -90,4 +92,5 @@ public abstract class Task {
     }
 
     public abstract void parseValueString();
+    public abstract void progressCompletion(String _value);
 }

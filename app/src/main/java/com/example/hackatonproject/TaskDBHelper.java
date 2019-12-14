@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class TaskDBHelper extends SQLiteOpenHelper {
 
     public TaskDBHelper(Context context){
@@ -33,5 +35,29 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         db.insert("tasks", null, cv);
         Cursor cursor = db.query("tasks", new String[] {"id"}, "type = ? and value = ? and ratingReward = ? and pointsReward = ? and decision = ?", new String[] {type.toString(), value, ratingReward.toString(), pointsReward.toString(), decision.toString()}, null, null, null);
         return cursor.getInt(cursor.getColumnIndex("id"));
+    }
+
+    public void delete(Task task) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("tasks", "id = ?", new String[] {task.id.toString()});
+    }
+
+    public ArrayList<StepsCountTask> getStepsCountTasks() {
+        ArrayList<StepsCountTask> tasks = new ArrayList<>();
+        Integer type = Task.TASK_TYPE_STEPS_COUNT;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("tasks", new String[] {"id", "type", "value", "ratingReward", "pointsReward", "decision"}, "type = ?", new String[] {type.toString()}, null, null, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String value = cursor.getString(cursor.getColumnIndex("value"));
+                int ratingReward = cursor.getInt(cursor.getColumnIndex("ratingReward"));
+                int pointsReward = cursor.getInt(cursor.getColumnIndex("pointsReward"));
+                boolean decision = cursor.getInt(cursor.getColumnIndex("decision")) == 1;
+                tasks.add(new StepsCountTask(id, value, ratingReward, pointsReward, decision));
+            }
+        }
+        return tasks;
     }
 }

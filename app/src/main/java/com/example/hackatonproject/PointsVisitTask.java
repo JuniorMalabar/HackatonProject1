@@ -28,4 +28,9 @@ public class PointsVisitTask extends Task {
         location.setLatitude(Double.parseDouble(params[0]));
         location.setLongitude(Double.parseDouble(params[1]));
     }
+
+    @Override
+    public void progressCompletion(String _value) {
+
+    }
 }
