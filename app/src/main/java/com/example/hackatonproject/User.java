@@ -16,16 +16,17 @@ public class User {
     private String password;
     private Integer points;
     private BonusesHistory history;
-    //private ArrayList<Task> tasks;
     private Integer rating; // Хранятся ОЧКИ рейтинга
+    private boolean studentMode;
 
-    public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history, Integer _rating) {
+    public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history, Integer _rating, boolean _studentMode) {
         id = _id;
         login = _login;
         password = _password;
         points = _points;
         history = _history;
         rating = _rating;
+        studentMode = _studentMode;
     }
 
     public static boolean tryToRegister(String _login, String _password) {
@@ -45,7 +46,6 @@ public class User {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         return false;
-
     }
 
     public static User tryToSignIn(String _login, String _password) {

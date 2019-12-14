@@ -18,10 +18,12 @@ public class AppHelper {
     private Location location;
     private LocationListener listener;
     private LocationManager manager;
+    private Context tabHostContext;
 
     public AppHelper(){
         user = null;
         location = null;
+        tabHostContext = null;
     }
 
     public void setUser(User user) {
@@ -33,6 +35,9 @@ public class AppHelper {
             @Override
             public void onLocationChanged(Location location) {
                 AppHelper.getInstance().setLocation(location);
+                for (PointsVisitTask task : PointsVisitTask.getAllPointsTasks()){
+                    task.progressCompletion("");
+                }
             }
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -61,6 +66,14 @@ public class AppHelper {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Context getTabHostContext() {
+        return tabHostContext;
+    }
+
+    public void setTabHostContext(Context tabHostContext) {
+        this.tabHostContext = tabHostContext;
     }
 
     public static AppHelper getInstance(){

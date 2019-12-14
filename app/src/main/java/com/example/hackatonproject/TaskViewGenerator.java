@@ -40,7 +40,7 @@ public class TaskViewGenerator {
                 task.acceptTask();
             }
         };
-        decline.setOnClickListener(acceptListner);
+        accept.setOnClickListener(acceptListner);
         if (task.type == Task.TASK_TYPE_GO_TO_POINT || task.type == Task.TASK_TYPE_GO_TO_ROUTE){
             Button showMap = new Button(context);
             View.OnClickListener mapConnector = new View.OnClickListener() {
@@ -60,6 +60,34 @@ public class TaskViewGenerator {
 
         taskView.addView(accept);
         taskView.addView(decline);
+        taskView.addView(description);
+
+        return taskView;
+    }
+
+    public LinearLayout generateAcceptedTaskView(final Context context, final Task task){
+        final LinearLayout taskView = new LinearLayout(context);
+        taskView.setGravity(Gravity.CENTER);
+
+        TextView description = new TextView(context);
+        description.setText(task.getDescription());
+
+        if (task.type == Task.TASK_TYPE_GO_TO_POINT || task.type == Task.TASK_TYPE_GO_TO_ROUTE){
+            Button showMap = new Button(context);
+            View.OnClickListener mapConnector = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("type",task.type);
+                    intent.putExtra("value",task.value);
+                    context.startActivity(intent);
+                }
+            };
+            showMap.setOnClickListener(mapConnector);
+
+            taskView.addView(showMap);
+        }
+
         taskView.addView(description);
 
         return taskView;
