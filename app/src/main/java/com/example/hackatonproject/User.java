@@ -2,6 +2,7 @@ package com.example.hackatonproject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,6 +93,24 @@ public class User {
         // Нужно найти, по какому индексу в полученном массиве находится AppData.getInstance().getUser()
         // Сделать AppData.getInstance().setUserPlace(найденный_индекс + 1)
         // Вернуть массив из первых 10 юзеров + самого юзера (AppHelper.getInstance().getUser()), т.е. в ответе 11 элементов
+
+        String query = RequestAsync.Url + "GetLiders.php";
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        RequestAsync task = new RequestAsync(null);
+        String value = null;
+        try {
+            value = task.execute(query).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        String[] UsersList = gson.fromJson(value, String[].class);
+        if (UsersList == null) {
+            return null;
+        }
         return null;
     }
 
