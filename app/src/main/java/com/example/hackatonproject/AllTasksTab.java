@@ -14,7 +14,7 @@ public class AllTasksTab extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_tab);
-        tasks = Task.getAllTasks();
+        tasks = new ArrayList<>(Task.getAllTasks());
         listView = findViewById(android.R.id.list);
         TasksAdapter adapter = new TasksAdapter(this, tasks, true);
         listView.setAdapter(adapter);
