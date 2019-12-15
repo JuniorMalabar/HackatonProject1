@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //bonuses = new ArrayList<>(AppHelper.getInstance().getUser().getBonuses());
+        bonuses = AppHelper.getInstance().getUser().getHistory();
         listView = findViewById(R.id.bonusesList);
         BonusesAdapter adapter = new BonusesAdapter(this, bonuses, false);
         listView.setAdapter(adapter);

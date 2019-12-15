@@ -18,7 +18,7 @@ public class BonusesAdapter extends BaseAdapter {
 
     public BonusesAdapter(Context context, ArrayList<Bonus> bonuses, boolean forShop) {
         this.context = context;
-        this.bonuses = new ArrayList<>(bonuses);
+        this.bonuses = bonuses;
         this.forShop = forShop;
         lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
