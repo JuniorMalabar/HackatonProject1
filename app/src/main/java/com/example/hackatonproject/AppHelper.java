@@ -31,7 +31,6 @@ public class AppHelper {
     public LeaderboardAdapter leaderboardAdapter;
     public BonusesAdapter shopAdapter;
     public BonusesAdapter historyAdapter;
-    public TextView balanceTextView;
 
 
     public AppHelper() {

@@ -105,6 +105,7 @@ public abstract class Task {
         alertbox.show();
 
         dbHelper.delete(this);
+        AppHelper.getInstance().acceptedTasksAdapter.notifyDataSetChanged();
     }
 
     public static Task generateTask(int _type){

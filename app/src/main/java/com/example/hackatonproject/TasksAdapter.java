@@ -44,6 +44,17 @@ public class TasksAdapter extends BaseAdapter {
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        if (allTasks){
+            tasks = Task.getAllTasks();
+        }
+        else {
+            tasks = Task.getAcceptedTasks();
+        }
+        super.notifyDataSetChanged();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {

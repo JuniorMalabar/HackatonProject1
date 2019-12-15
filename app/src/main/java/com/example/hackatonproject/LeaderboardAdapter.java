@@ -103,4 +103,10 @@ public class LeaderboardAdapter extends BaseAdapter {
             }
         }*/
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        users = User.getUsersByRating();
+        super.notifyDataSetChanged();
+    }
 }

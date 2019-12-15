@@ -79,4 +79,15 @@ public class BonusesAdapter extends BaseAdapter {
         }
         return view;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        if (forShop){
+            bonuses = Bonus.getBonusesCatalog();
+        }
+        else{
+            bonuses = AppHelper.getInstance().getUser().getHistory();
+        }
+        super.notifyDataSetChanged();
+    }
 }
