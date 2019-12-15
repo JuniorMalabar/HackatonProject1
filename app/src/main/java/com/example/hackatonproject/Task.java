@@ -159,10 +159,11 @@ public abstract class Task {
     }
 
     public void declineTask(){
-
+        dbHelper.delete(this);
     }
 
     public void acceptTask(){
+        dbHelper.update(id, "decision", 1);
 
     }
 
