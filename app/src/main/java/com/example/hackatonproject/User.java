@@ -86,13 +86,11 @@ public class User {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String[] massOfBonuses = gson.fromJson(value, String[].class);
+        HashMap<String,String>[] massOfBonuses = gson.fromJson(value, HashMap[].class);
 
         ArrayList<Bonus> retArr = new ArrayList<Bonus>();
 
-        for (String strTemp : massOfBonuses) {
-            HashMap<String, String> Bonusmap = gson.fromJson(value, HashMap.class);
-
+        for (HashMap<String,String> Bonusmap : massOfBonuses) {
             retArr.add(new Bonus(Integer.parseInt(Bonusmap.get("id")), Bonusmap.get("organozation_name"), Bonusmap.get("description"), Bonusmap.get("promo_code"),  Integer.parseInt(Bonusmap.get("cost"))));
         }
         return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), retArr, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode"))==1); // DEBUG
@@ -117,7 +115,7 @@ public class User {
             e.printStackTrace();
         }
 
-        String[] UsersList = gson.fromJson(value, String[].class);
+        HashMap<String,String>[] UsersList = gson.fromJson(value, HashMap[].class);
 
         if (UsersList == null) {
             return null;
@@ -125,9 +123,7 @@ public class User {
 
         ArrayList<User> retArr = new ArrayList<User>();
 
-        for (String strTemp : UsersList) {
-            HashMap<String, String> Usermap = gson.fromJson(value, HashMap.class);
-
+        for (HashMap<String,String> Usermap : UsersList) {
             retArr.add(new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1));
         }
         return retArr;
