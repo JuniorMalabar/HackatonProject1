@@ -2,6 +2,9 @@ package com.example.hackatonproject;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,7 +54,7 @@ public class Organization {
         }
         HashMap<String,String>[] CoordsStringList = gson.fromJson(value, HashMap[].class);
         for (HashMap<String,String> Coords : CoordsStringList) {
-            Location loc = new Location(LocationManager.GPS_PROVIDER);
+            Location loc = new Location(LocationManager.NETWORK_PROVIDER);
             loc.setLatitude(Double.parseDouble(Coords.get("latitude")));
             loc.setLongitude(Double.parseDouble(Coords.get("longtitude")));
             organizations.add(new Organization(Integer.parseInt(Coords.get("id")), Coords.get("organize_name"), loc));
@@ -72,6 +75,7 @@ public class Organization {
         return location;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public Integer distanceFromCurrentLocation() {
         return Math.round(location.distanceTo(AppHelper.getInstance().getLocation()));
     }
