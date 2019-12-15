@@ -12,7 +12,6 @@ import android.widget.TextView;
 public class TabsHost extends TabActivity {
 
     public TextView username;
-    public AlarmManager manager;
 
     @Override
     protected void onResume() {
@@ -61,19 +60,12 @@ public class TabsHost extends TabActivity {
         Intent leaderboardIntent = new Intent(this, Leaderboard.class);
         leaderboardTab.setContent(leaderboardIntent);
 
-        // Вкладка Settings
-        android.widget.TabHost.TabSpec settingsTab = tabHost.newTabSpec("Settings");
-        settingsTab.setIndicator("Настройки");
-        Intent settingsIntent = new Intent(this, Settings.class);
-        settingsTab.setContent(settingsIntent);
-
-        // Добавляем вкладки в
+        // Добавляем вкладки в TabHost
         tabHost.addTab(availableTasksTab);
         tabHost.addTab(acceptedTasksTab);
         tabHost.addTab(historyTab);
         tabHost.addTab(shopTab);
         tabHost.addTab(leaderboardTab);
-        tabHost.addTab(settingsTab);
 
       //  AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         RecurringTasks recurringTasks = new RecurringTasks();
