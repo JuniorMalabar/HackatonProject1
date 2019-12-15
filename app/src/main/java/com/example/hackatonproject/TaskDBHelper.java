@@ -55,7 +55,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         Integer type = Task.TASK_TYPE_STEPS_COUNT;
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query("tasks", new String[]{"*"}, "type = ?", new String[]{type.toString()}, null, null, null);
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
                 int id = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -75,7 +75,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         int type1 = Task.TASK_TYPE_GO_TO_POINT;
         int type2 = Task.TASK_TYPE_GO_TO_ROUTE;
         Cursor cursor = db.query("tasks", new String[]{"*"}, "type IN (?, ?)", new String[]{Integer.toString(type1), Integer.toString(type2)}, null, null, null);
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
                 int id = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -113,28 +113,27 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(column, value);
-        db.update("tasks", cv, "_id = ?", new String[] {id.toString()});
+        db.update("tasks", cv, "_id = ?", new String[]{id.toString()});
     }
 
     public ArrayList<Task> getAcceptedTasks() {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<Task> tasks = new ArrayList<>();
-        Cursor cursor = db.query("tasks", new String[] {"*"}, "decision = ?", new String[] {"1"}, null, null, null);
-        if (cursor != null){
-            while (cursor.moveToNext()){
+        Cursor cursor = db.query("tasks", new String[]{"*"}, "decision = ?", new String[]{"1"}, null, null, null);
+        if (cursor.getCount() > 0) {
+            do {
                 int id = cursor.getInt(cursor.getColumnIndex("_id"));
                 String value = cursor.getString(cursor.getColumnIndex("value"));
                 int type = cursor.getInt(cursor.getColumnIndex("type"));
                 int ratingReward = cursor.getInt(cursor.getColumnIndex("ratingReward"));
                 int pointsReward = cursor.getInt(cursor.getColumnIndex("pointsReward"));
                 boolean decision = cursor.getInt(cursor.getColumnIndex("decision")) == 1;
-                if (type == Task.TASK_TYPE_STEPS_COUNT){
+                if (type == Task.TASK_TYPE_STEPS_COUNT) {
                     tasks.add(new StepsCountTask(id, value, ratingReward, pointsReward, decision));
-                }
-                else{
+                } else {
                     tasks.add(new PointsVisitTask(id, type, value, ratingReward, pointsReward, decision));
                 }
-            }
+            } while (cursor.moveToNext());
         }
         return tasks;
     }
