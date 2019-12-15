@@ -77,7 +77,7 @@ public class TasksAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     task.acceptTask();
-                    tasks = Task.getAllTasks();
+                    tasks.remove(task);
                     notifyDataSetChanged();
                 }
             };
