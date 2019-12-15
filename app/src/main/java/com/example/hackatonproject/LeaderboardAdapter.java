@@ -57,6 +57,9 @@ public class LeaderboardAdapter extends BaseAdapter {
             place.setText(currentUserPlace);
         }
         else {
+            if (position == getCount()-1){
+                return view;
+            }
             if (position == currentUserPlace-1){
                 place.setTextColor(Color.YELLOW);
                 name.setTextColor(Color.YELLOW);
