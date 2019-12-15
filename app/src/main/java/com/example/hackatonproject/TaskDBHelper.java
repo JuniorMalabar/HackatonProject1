@@ -121,6 +121,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         ArrayList<Task> tasks = new ArrayList<>();
         Cursor cursor = db.query("tasks", new String[]{"*"}, "decision = ?", new String[]{"1"}, null, null, null);
         if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
             do {
                 int id = cursor.getInt(cursor.getColumnIndex("_id"));
                 String value = cursor.getString(cursor.getColumnIndex("value"));
