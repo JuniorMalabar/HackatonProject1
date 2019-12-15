@@ -16,16 +16,16 @@ public class User {
     private String login;
     private String password;
     private Integer points;
-    private BonusesHistory history;
+    private ArrayList<Bonus> historyOfBonuses;
     private Integer rating; // Хранятся ОЧКИ рейтинга
     private boolean studentMode;
 
-    public User(Integer _id, String _login, String _password, Integer _points, BonusesHistory _history, Integer _rating, boolean _studentMode) {
+    public User(Integer _id, String _login, String _password, Integer _points, ArrayList<Bonus> _history, Integer _rating, boolean _studentMode) {
         id = _id;
         login = _login;
         password = _password;
         points = _points;
-        history = _history;
+        historyOfBonuses = _history;
         rating = _rating;
         studentMode = _studentMode;
     }
@@ -37,8 +37,10 @@ public class User {
         map.put("password", _password);
         String query = RequestAsync.Url + "RegisterUser.php";
         RequestAsync task = new RequestAsync(map);
+        String value = null;
+
         try {
-            task.execute(query).get();
+            value = task.execute(query).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -46,7 +48,7 @@ public class User {
         }
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
-        return false;
+        return gson.fromJson(value, Boolean.class);
     }
 
     public static User tryToSignIn(String _login, String _password) {
@@ -84,9 +86,17 @@ public class User {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        map = gson.fromJson(value, HashMap.class);
-        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")),false); // DEBUG
-    }
+        String[] massOfBonuses = gson.fromJson(value, String[].class);
+
+        ArrayList<Bonus> retArr = new ArrayList<Bonus>();
+
+        for (String strTemp : massOfBonuses) {
+            HashMap<String, String> Bonusmap = gson.fromJson(value, HashMap.class);
+
+            retArr.add(new Bonus(Integer.parseInt(Bonusmap.get("id")), Bonusmap.get("organozation_name"), Bonusmap.get("description"), Bonusmap.get("promo_code"),  Integer.parseInt(Bonusmap.get("cost"))));
+        }
+        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")), false); // DEBUG
+        }
 
     public static ArrayList<User> getUsersByRating() {
         // Нужно получить всех юзеров сортированных ПО УБЫВАНИЮ рейтигна из бд
@@ -108,10 +118,19 @@ public class User {
         }
 
         String[] UsersList = gson.fromJson(value, String[].class);
+
         if (UsersList == null) {
             return null;
         }
-        return null;
+
+        ArrayList<User> retArr = new ArrayList<User>();
+
+        for (String strTemp : UsersList) {
+            HashMap<String, String> Usermap = gson.fromJson(value, HashMap.class);
+
+            retArr.add(new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1));
+        }
+        return retArr;
     }
 
     public String getLogin() {
@@ -126,8 +145,8 @@ public class User {
     //return new ArrayList<>(tasks);
     //}
 
-    public BonusesHistory getHistory() {
-        return history;
+    public ArrayList<Bonus> getHistory() {
+        return historyOfBonuses;
     }
 
     public Integer getRating() {
@@ -149,7 +168,7 @@ public class User {
     public boolean tryToPurchaseBonus(Bonus bonus) {
         if (points >= bonus.getCost()) {
             points -= bonus.getCost();
-            history.addBonus(bonus);
+          //  historyOfBonuses.addBonus(bonus);
             // Сохранить изменения в бд
             return true;
         }

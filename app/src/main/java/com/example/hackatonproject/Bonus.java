@@ -9,14 +9,22 @@ public class Bonus {
     private String code;
     private Integer cost;
 
-    public Bonus(String _organization, String _description, String _code, Integer _cost){
+    public Bonus(String _organization, String _description, String _code, Integer _cost) {
         organization = _organization;
         description = _description;
         code = _code;
         cost = _cost;
     }
 
-    public static ArrayList<Bonus> getBonusesCatalog(){
+    public Bonus(Integer id, String _organization, String _description, String _code, Integer _cost) {
+        this.id = id;
+        organization = _organization;
+        description = _description;
+        code = _code;
+        cost = _cost;
+    }
+
+    public static ArrayList<Bonus> getBonusesCatalog() {
         return null; // На самом деле нужно сгенерить каталог бонусов из бд
     }
 

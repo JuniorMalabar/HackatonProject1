@@ -1,9 +1,15 @@
 package com.example.hackatonproject;
 
 import android.location.Location;
+import android.location.LocationManager;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class Organization {
     private Integer id;
@@ -20,8 +26,8 @@ public class Organization {
         ArrayList<Organization> organizations = new ArrayList<>(); // по факту - собрать с бд все организации
         Integer minDist = Integer.MAX_VALUE;
         Organization closestOrg = null;
-        for (Organization org: organizations) {
-            if (org.distanceFromCurrentLocation() < minDist){
+        for (Organization org : organizations) {
+            if (org.distanceFromCurrentLocation() < minDist) {
                 minDist = org.distanceFromCurrentLocation();
                 closestOrg = org;
             }
@@ -31,11 +37,31 @@ public class Organization {
 
     public static Organization getRandomPoint() {
         ArrayList<Organization> organizations = new ArrayList<>(); // по факту - собрать с бд все организации
+        String query = RequestAsync.Url + "GetCoords.php";
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        RequestAsync task = new RequestAsync(null);
+        String value = null;
+        try {
+            value = task.execute(query).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String[] CoordsStringList = gson.fromJson(value, String[].class);
+        for (String strTemp : CoordsStringList) {
+            HashMap<String, String> Coords = gson.fromJson(value, HashMap.class);
+            Location loc = new Location(LocationManager.GPS_PROVIDER);
+            loc.setLatitude(Double.parseDouble(Coords.get("latitude")));
+            loc.setLongitude(Double.parseDouble(Coords.get("longtitude")));
+            organizations.add(new Organization(Integer.parseInt(Coords.get("id")), Coords.get("organize_name"), loc));
+        }
         Random random = new Random();
         return organizations.get(random.nextInt(organizations.size()));
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
@@ -43,7 +69,7 @@ public class Organization {
         return name;
     }
 
-    public Location getLocation(){
+    public Location getLocation() {
         return location;
     }
 
