@@ -95,7 +95,7 @@ public class User {
 
             retArr.add(new Bonus(Integer.parseInt(Bonusmap.get("id")), Bonusmap.get("organozation_name"), Bonusmap.get("description"), Bonusmap.get("promo_code"),  Integer.parseInt(Bonusmap.get("cost"))));
         }
-        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")), false); // DEBUG
+        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), retArr, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode"))==1); // DEBUG
         }
 
     public static ArrayList<User> getUsersByRating() {
