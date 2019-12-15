@@ -12,6 +12,8 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
+import java.util.Map;
+
 import static androidx.core.content.ContextCompat.getSystemService;
 
 public class AppHelper {
@@ -106,4 +108,24 @@ public class AppHelper {
     public void setUserPlace(Integer place) {
         this.place = place;
     }
+    final static String url = "http://u0896591.plsk.regruhosting.ru/";
+
+    public static String GenerateQuery(Map<String, String> map) {
+        if (map == null) {
+            return "";
+        }
+        String _ret = "?";
+        boolean begin = true;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (!begin) {
+                _ret += "&";
+            }
+            begin = false;
+            _ret += (entry.getKey() + "=" + entry.getValue());
+        }
+
+
+        return _ret.replace(' ', '+');
+    }
+
 }
