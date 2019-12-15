@@ -41,7 +41,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
 
     public void delete(Task task) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete("tasks", "id = ?", new String[] {task.id.toString()});
+        db.delete("tasks", "_id = ?", new String[] {task.id.toString()});
     }
 
     public ArrayList<StepsCountTask> getStepsCountTasks() {
