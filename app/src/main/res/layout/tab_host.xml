@@ -38,6 +38,7 @@
         </HorizontalScrollView>
 
         <FrameLayout
+            android:layout_gravity="center"
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

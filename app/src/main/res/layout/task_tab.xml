@@ -12,11 +12,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:gravity="center">
 
         <ListView
+            android:padding="5dp"
             android:id="@android:id/list"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
