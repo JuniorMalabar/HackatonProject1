@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //bonuses = new ArrayList<>(AppHelper.getInstance().getUser().getBonuses());
+        bonuses = AppHelper.getInstance().getUser().getHistory();
         listView = findViewById(R.id.bonusesList);
         AppHelper.getInstance().generateHistoryAdapter(this);
         listView.setAdapter(AppHelper.getInstance().historyAdapter);
