@@ -48,7 +48,29 @@ public class LeaderboardAdapter extends BaseAdapter {
         TextView place = view.findViewById(R.id.place);
         TextView name = view.findViewById(R.id.name);
         TextView ratingPoints = view.findViewById(R.id.ratingPoints);
-        if (position == 10){
+        if (getCount() <= 10){
+            if (position == currentUserPlace - 1){
+                place.setTextColor(Color.YELLOW);
+                name.setTextColor(Color.YELLOW);
+                ratingPoints.setTextColor(Color.YELLOW);
+            }
+            place.setText(Integer.toString(position + 1));
+        }
+        else{
+            if (position == 10){
+                place.setTextColor(Color.YELLOW);
+                name.setTextColor(Color.YELLOW);
+                ratingPoints.setTextColor(Color.YELLOW);
+                place.setText(Integer.toString(currentUserPlace));
+            }
+            else{
+                place.setText(Integer.toString(position + 1));
+            }
+        }
+        name.setText(user.getLogin());
+        ratingPoints.setText(user.getRating().toString());
+        return view;
+        /*if (position == 10){
             if (currentUserPlace <= 10)
                 return view;
             place.setTextColor(Color.YELLOW);
@@ -69,9 +91,6 @@ public class LeaderboardAdapter extends BaseAdapter {
             else{
                 place.setText(position+1);
             }
-        }
-        name.setText(user.getLogin());
-        ratingPoints.setText(user.getRating());
-        return view;
+        }*/
     }
 }
