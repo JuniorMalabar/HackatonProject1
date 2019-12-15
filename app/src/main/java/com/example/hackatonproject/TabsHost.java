@@ -4,19 +4,33 @@ import android.app.AlarmManager;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class TabsHost extends TabActivity {
-
+public class TabsHost extends TabActivity implements SensorEventListener {
+    private SensorManager sensorManager;
+    private boolean running;
     public TextView username;
 
     @Override
     protected void onResume() {
         super.onResume();
         AppHelper.getInstance().refreshLocation(this);
+        running = true;
+        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if (countSensor != null) {
+            sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
+        } else {
+            Toast.makeText(this, "Sensor not found, sorry", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -73,11 +87,22 @@ public class TabsHost extends TabActivity {
 
 
         AppHelper.getInstance().setTabHostContext(this);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
 
     public void logOut (View view){
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }
 

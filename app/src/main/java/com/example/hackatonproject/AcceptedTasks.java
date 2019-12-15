@@ -19,8 +19,8 @@ public class AcceptedTasks extends ListActivity {
         setContentView(R.layout.activity_accepted_tasks);
         listView = findViewById(android.R.id.list);
         acceptedTasks = Task.getAcceptedTasks();
-        TasksAdapter adapter = new TasksAdapter(this, acceptedTasks, false);
-        listView.setAdapter(adapter);
+        AppHelper.getInstance().generateAcceptedTasksAdapter(this);
+        listView.setAdapter(AppHelper.getInstance().acceptedTasksAdapter);
 //        listView = new ListView(this);
 //        listView.setId(android.R.id.list);
 //        ll = findViewById(R.id.ll);

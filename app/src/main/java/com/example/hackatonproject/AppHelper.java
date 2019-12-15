@@ -8,6 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
@@ -25,11 +26,39 @@ public class AppHelper {
     private Context tabHostContext;
     private Integer place;
 
+    public TasksAdapter allTasksAdapter;
+    public TasksAdapter acceptedTasksAdapter;
+    public LeaderboardAdapter leaderboardAdapter;
+    public BonusesAdapter shopAdapter;
+    public BonusesAdapter historyAdapter;
+    public TextView balanceTextView;
+
+
     public AppHelper() {
         user = null;
         location = null;
         tabHostContext = null;
         place = null;
+    }
+
+    public void generateAllTasksAdapter(Context context){
+        allTasksAdapter = new TasksAdapter(context, Task.getAllTasks(), true);
+    }
+
+    public void generateAcceptedTasksAdapter(Context context){
+        acceptedTasksAdapter = new TasksAdapter(context, Task.getAcceptedTasks(), false);
+    }
+
+    public void generateLeaderboardAdapter(Context context){
+        leaderboardAdapter = new LeaderboardAdapter(context, User.getUsersByRating(), getUserPlace());
+    }
+
+    public void generateShopAdapter(Context context){
+        shopAdapter = new BonusesAdapter(context, Bonus.getBonusesCatalog(), true);
+    }
+
+    public void generateHistoryAdapter(Context context){
+        historyAdapter = new BonusesAdapter(context, user.getHistory(), false);
     }
 
     public void setUser(User user) {

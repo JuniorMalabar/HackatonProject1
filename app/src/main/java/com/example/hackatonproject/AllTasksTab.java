@@ -16,8 +16,8 @@ public class AllTasksTab extends ListActivity {
         setContentView(R.layout.task_tab);
         tasks = new ArrayList<>(Task.getAllTasks());
         listView = findViewById(android.R.id.list);
-        TasksAdapter adapter = new TasksAdapter(this, tasks, true);
-        listView.setAdapter(adapter);
+        AppHelper.getInstance().generateAllTasksAdapter(this);
+        listView.setAdapter(AppHelper.getInstance().allTasksAdapter);
     }
 }
 

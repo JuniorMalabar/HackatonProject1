@@ -111,7 +111,7 @@ public abstract class Task {
         Random random = new Random();
         switch (_type){
             case TASK_TYPE_STEPS_COUNT:
-                int steps = random.nextInt(5001) + 5000;
+                int steps = random.nextInt(10) + 10;
                 return new StepsCountTask(steps / 10, (int) Math.round(steps * AppHelper.getInstance().getUser().getMultiplier() / 50), false, steps);
             case TASK_TYPE_GO_TO_POINT:
                 int probability = random.nextInt(100);

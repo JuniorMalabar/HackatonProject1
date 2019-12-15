@@ -16,9 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    private SensorManager sensorManager;
-    private boolean running = false;
+public class MainActivity extends AppCompatActivity{
     private ListView listView;
     private ArrayList<Bonus> bonuses;
 
@@ -28,55 +26,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         bonuses = AppHelper.getInstance().getUser().getHistory();
         listView = findViewById(R.id.bonusesList);
-        BonusesAdapter adapter = new BonusesAdapter(this, bonuses, false);
-        listView.setAdapter(adapter);
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        running = true;
-        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        if (countSensor != null) {
-            sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
-        } else {
-            Toast.makeText(this, "Sensor not found, sorry", Toast.LENGTH_SHORT).show();
-        }
-    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        running = false;
-//
-//    } @Override
-//    protected void onStop() {
-//        super.onStop();
-//        running = false;
-//
-//    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (running) {
-            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-            Integer stepsPassed = sharedPreferences.getInt("stepsGone", -1);
-            if (stepsPassed != -1) {
-                Integer diff = (int) event.values[0] - stepsPassed;
-                for (StepsCountTask task : StepsCountTask.getAllStepsCountTasks()) {
-                    task.progressCompletion(diff.toString());
-                }
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.putInt("stepsGone", (int) event.values[0]);
-                editor.apply();
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+        AppHelper.getInstance().generateHistoryAdapter(this);
+        listView.setAdapter(AppHelper.getInstance().historyAdapter);
     }
 }
