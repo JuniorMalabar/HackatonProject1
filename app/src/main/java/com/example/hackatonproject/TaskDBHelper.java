@@ -16,7 +16,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null, ratingReward integer not null, pointsReward integer not null, decision integer not null);");
+        db.execSQL("create table tasks (_id integer primary key autoincrement, type integer not null, value text not null, ratingReward integer not null, pointsReward integer not null, decision integer not null);");
     }
 
     @Override
@@ -32,11 +32,11 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         cv.put("pointsReward", pointsReward);
         cv.put("decision", decision);
         SQLiteDatabase db = getWritableDatabase();
-        db.insert("tasks", null, cv);
-        db = getReadableDatabase();
-        Cursor cursor = db.query("tasks", new String[] {"id"}, "type = ? and value = ? and ratingReward = ? and pointsReward = ? and decision = ?", new String[] {type.toString(), value, ratingReward.toString(), pointsReward.toString(), decision.toString()}, null, null, null);
-        cursor.moveToFirst();
-        return cursor.getInt(cursor.getColumnIndex("id"));
+        return (int)db.insert("tasks", null, cv);
+//        db = getReadableDatabase();
+//        Cursor cursor = db.query("tasks", new String[] {"_id"}, "type = ? and value = ? and ratingReward = ? and pointsReward = ? and decision = ?", new String[] {type.toString(), value, ratingReward.toString(), pointsReward.toString(), decision.toString()}, null, null, null);
+//        cursor.moveToFirst();
+//        return cursor.getInt(cursor.getColumnIndex("_id"));
     }
 
     public void delete(Task task) {
@@ -48,11 +48,11 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         ArrayList<StepsCountTask> tasks = new ArrayList<>();
         Integer type = Task.TASK_TYPE_STEPS_COUNT;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query("tasks", new String[] {"id", "type", "value", "ratingReward", "pointsReward", "decision"}, "type = ?", new String[] {type.toString()}, null, null, null);
+        Cursor cursor = db.query("tasks", new String[] {"*"}, "type = ?", new String[] {type.toString()}, null, null, null);
         if (cursor != null){
             cursor.moveToFirst();
             while (cursor.moveToNext()){
-                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                int id = cursor.getInt(cursor.getColumnIndex("_id"));
                 String value = cursor.getString(cursor.getColumnIndex("value"));
                 int ratingReward = cursor.getInt(cursor.getColumnIndex("ratingReward"));
                 int pointsReward = cursor.getInt(cursor.getColumnIndex("pointsReward"));
@@ -68,11 +68,11 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Integer type1 = Task.TASK_TYPE_GO_TO_POINT;
         Integer type2 = Task.TASK_TYPE_GO_TO_ROUTE;
-        Cursor cursor = db.query("tasks", new String[] {"id", "type", "value", "ratingReward", "pointsReward", "decision"}, "type = ? or type = ?", new String[] {type1.toString(), type2.toString()}, null, null, null);
+        Cursor cursor = db.query("tasks", new String[] {"*"}, "type = ? or type = ?", new String[] {type1.toString(), type2.toString()}, null, null, null);
         if (cursor != null){
             cursor.moveToFirst();
             while (cursor.moveToNext()){
-                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                int id = cursor.getInt(cursor.getColumnIndex("_id"));
                 String value = cursor.getString(cursor.getColumnIndex("value"));
                 int type = cursor.getInt(cursor.getColumnIndex("type"));
                 int ratingReward = cursor.getInt(cursor.getColumnIndex("ratingReward"));
