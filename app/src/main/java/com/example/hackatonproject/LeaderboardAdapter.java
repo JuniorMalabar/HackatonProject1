@@ -53,6 +53,7 @@ public class LeaderboardAdapter extends BaseAdapter {
                 place.setTextColor(Color.YELLOW);
                 name.setTextColor(Color.YELLOW);
                 ratingPoints.setTextColor(Color.YELLOW);
+                place.setText(Integer.toString(position + 1));
             }
             else{
                 place.setTextColor(Color.WHITE);
