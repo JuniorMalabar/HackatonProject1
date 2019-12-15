@@ -138,9 +138,9 @@ public class User implements Comparable<User> {
                 AppHelper.getInstance().setUserPlace(i + 1);
             }
         }
-        if (retArr.size() > 10) {
+        if (retArr.size() >= 10) {
             ArrayList<User> tmp = new ArrayList<User>(retArr.subList(0, 10));
-            if (AppHelper.getInstance().getUserPlace() > 10) {
+            if (AppHelper.getInstance().getUserPlace() >= 10) {
                 tmp.add(retArr.get(AppHelper.getInstance().getUserPlace() - 1));
             }
             return tmp;

@@ -71,7 +71,7 @@ public class LeaderboardAdapter extends BaseAdapter {
             }
         }
         name.setText(user.getLogin());
-        ratingPoints.setText(user.getRating());
+        ratingPoints.setText(user.getRating().toString());
         return view;
     }
 }
