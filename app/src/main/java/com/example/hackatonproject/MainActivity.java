@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         //bonuses = new ArrayList<>(AppHelper.getInstance().getUser().getBonuses());
         listView = findViewById(R.id.bonusesList);
-        BonusesAdapter adapter = new BonusesAdapter(this, bonuses);
+        BonusesAdapter adapter = new BonusesAdapter(this, bonuses, false);
         listView.setAdapter(adapter);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
