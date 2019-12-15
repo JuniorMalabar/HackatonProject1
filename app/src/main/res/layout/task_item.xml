@@ -12,15 +12,15 @@
         android:text="Инфо"
         android:id="@+id/showInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"/>
     <Button
         android:id="@+id/accept"
         android:text="✓"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"/>
     <Button
         android:id="@+id/decline"
         android:text="✗"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"/>
 </LinearLayout>
