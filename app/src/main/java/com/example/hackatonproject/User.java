@@ -73,7 +73,6 @@ public class User {
         if (Usermap == null) {
             return null;
         }
-
         query = RequestAsync.Url + "GetHistoryOfThisOne.php";
         map = new HashMap<String, String>();
         map.put("id", Usermap.get("id"));
@@ -191,12 +190,48 @@ public class User {
     }
 
     public boolean tryToPurchaseBonus(Bonus bonus) {
-        if (points >= bonus.getCost()) {
-            points -= bonus.getCost();
-            //  historyOfBonuses.addBonus(bonus);
-            // Сохранить изменения в бд
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("user_id", AppHelper.getInstance().getUser().id.toString());
+        map.put("bonus_id", Integer.toString(bonus.getId()));
+        String query = RequestAsync.Url + "AddBonusToHistory.php";
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        RequestAsync task = new RequestAsync(map);
+        String value = null;
+        try {
+            value = task.execute(query).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        HashMap<String, String> Usermap = gson.fromJson(value, HashMap.class);
+
+        if (Usermap == null) {
+            return false;
+        } else {
+            query = RequestAsync.Url + "GetHistoryOfThisOne.php";
+            map = new HashMap<String, String>();
+            map.put("id", Usermap.get("id"));
+            task = new RequestAsync(map);
+            value = null;
+            try {
+                value = task.execute(query).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            HashMap<String, String>[] massOfBonuses = gson.fromJson(value, HashMap[].class);
+
+            ArrayList<Bonus> retArr = new ArrayList<Bonus>();
+
+            for (HashMap<String, String> Bonusmap : massOfBonuses) {
+                retArr.add(new Bonus(Integer.parseInt(Bonusmap.get("id")), Bonusmap.get("organozation_name"), Bonusmap.get("description"), Bonusmap.get("promo_code"), Integer.parseInt(Bonusmap.get("cost"))));
+            }
+            AppHelper.getInstance().setUser(new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), retArr, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1));
             return true;
         }
-        return false;
     }
 }
