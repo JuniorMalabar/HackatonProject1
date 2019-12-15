@@ -100,6 +100,6 @@ public class TaskDBHelper extends SQLiteOpenHelper {
     public void recreateTable() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("drop table if exists tasks");
-        db.execSQL("create table tasks (id integer primary key autoincrement, type integer not null, value text not null, ratingReward integer not null, pointsReward integer not null, decision integer not null);");
+        db.execSQL("create table tasks (_id integer primary key autoincrement, type integer not null, value text not null, ratingReward integer not null, pointsReward integer not null, decision integer not null);");
     }
 }
