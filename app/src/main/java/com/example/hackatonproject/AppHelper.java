@@ -101,7 +101,7 @@ public class AppHelper {
         return helper;
     }
 
-    public Integer getUserPlace() {
+    public int getUserPlace() {
         return place;
     }
 

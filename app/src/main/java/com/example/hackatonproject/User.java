@@ -5,13 +5,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import static java.lang.Math.exp;
 
-public class User {
+public class User implements Comparable<User> {
     private Integer id;
     private String login;
     private String password;
@@ -28,6 +30,10 @@ public class User {
         historyOfBonuses = _history;
         rating = _rating;
         studentMode = _studentMode;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static boolean tryToRegister(String _login, String _password) {
@@ -125,7 +131,22 @@ public class User {
         for (HashMap<String, String> Usermap : UsersList) {
             retArr.add(new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1));
         }
-        return retArr;
+
+        Collections.sort(retArr, Collections.reverseOrder());
+        for (int i = 0; i < retArr.size(); i++) {
+            if (retArr.get(i).id == AppHelper.getInstance().getUser().getId()) {
+                AppHelper.getInstance().setUserPlace(i + 1);
+            }
+        }
+        if (retArr.size() > 10) {
+            ArrayList<User> tmp = new ArrayList<User>(retArr.subList(0, 10));
+            if (AppHelper.getInstance().getUserPlace() > 10) {
+                tmp.add(retArr.get(AppHelper.getInstance().getUserPlace() - 1));
+            }
+            return tmp;
+        } else {
+            return retArr;
+        }
     }
 
     public String getLogin() {
@@ -233,5 +254,10 @@ public class User {
             AppHelper.getInstance().setUser(new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), retArr, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1));
             return true;
         }
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.rating.compareTo(o.getRating());
     }
 }
