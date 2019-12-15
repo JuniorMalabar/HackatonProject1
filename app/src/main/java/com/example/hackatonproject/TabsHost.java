@@ -15,6 +15,12 @@ public class TabsHost extends TabActivity {
     public AlarmManager manager;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        AppHelper.getInstance().refreshLocation(this);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_host);
@@ -73,7 +79,7 @@ public class TabsHost extends TabActivity {
         RecurringTasks recurringTasks = new RecurringTasks();
         recurringTasks.setRecurringTasks(this);
 
-        AppHelper.getInstance().initTracking(this);
+
         AppHelper.getInstance().setTabHostContext(this);
     }
 

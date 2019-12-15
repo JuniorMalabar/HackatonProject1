@@ -2,6 +2,9 @@ package com.example.hackatonproject;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -72,6 +75,7 @@ public class Organization {
         return location;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public Integer distanceFromCurrentLocation() {
         return Math.round(location.distanceTo(AppHelper.getInstance().getLocation()));
     }

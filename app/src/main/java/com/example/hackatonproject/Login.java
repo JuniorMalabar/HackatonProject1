@@ -20,12 +20,20 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         loginText = findViewById(R.id.login_login);
         passwordText = findViewById(R.id.login_password);
+        AppHelper.getInstance();
+        AppHelper.getInstance().initTracking(this);
         Task.setDBHelper(this);
     }
 
     public void toRegistration(View view){
         Intent intent = new Intent(getApplicationContext(), Registration.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppHelper.getInstance().refreshLocation(this);
     }
 
     public void signIn(View view) {

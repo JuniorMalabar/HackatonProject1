@@ -120,7 +120,7 @@ public abstract class Task {
                 }
                 else{
                     int partition = random.nextInt(100);
-                    Location location = new Location(LocationManager.GPS_PROVIDER);
+                    Location location = new Location(LocationManager.NETWORK_PROVIDER);
                     location.setLatitude((organization.getLocation().getLatitude()*partition)/100);
                     location.setLongitude((organization.getLocation().getLongitude()*partition)/100);
                     Integer distance = organization.distanceFromCurrentLocation();
@@ -140,7 +140,7 @@ public abstract class Task {
                     }
                     else{
                         int partition = random.nextInt(100);
-                        Location location = new Location(LocationManager.GPS_PROVIDER);
+                        Location location = new Location(LocationManager.NETWORK_PROVIDER);
                         location.setLatitude((organization.getLocation().getLatitude()*partition)/100);
                         location.setLongitude((organization.getLocation().getLongitude()*partition)/100);
                         distance = organization.distanceFromCurrentLocation();

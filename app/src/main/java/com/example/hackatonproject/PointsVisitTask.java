@@ -3,8 +3,10 @@ package com.example.hackatonproject;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 
@@ -59,13 +61,14 @@ public class PointsVisitTask extends Task {
             }
             lastFoundIndex = value.indexOf(");", index+1);
             String[] params = value.substring(index, lastFoundIndex).split(",");
-            Location location = new Location(LocationManager.GPS_PROVIDER);
-            location.setLatitude(Double.parseDouble(params[0]));
-            location.setLongitude(Double.parseDouble(params[1]));
+            Location location = new Location(LocationManager.NETWORK_PROVIDER);
+            location.setLatitude(Double.parseDouble(params[0].substring(1)));
+            location.setLongitude(Double.parseDouble(params[1].substring(0, params[1].length()-2)));
             locations.add(location);
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void progressCompletion(String _value) {
         for (Location location : locations) {
