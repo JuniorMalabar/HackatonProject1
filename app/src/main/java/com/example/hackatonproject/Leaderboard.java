@@ -16,7 +16,7 @@ public class Leaderboard extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
         listView = findViewById(android.R.id.list);
         users = User.getUsersByRating();
-        LeaderboardAdapter adapter = new LeaderboardAdapter(this, users, AppHelper.getInstance().getUserPlace());
-        listView.setAdapter(adapter);
+        AppHelper.getInstance().generateLeaderboardAdapter(this);
+        listView.setAdapter(AppHelper.getInstance().leaderboardAdapter);
     }
 }

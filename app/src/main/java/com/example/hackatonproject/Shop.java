@@ -16,8 +16,8 @@ public class Shop extends ListActivity {
         setContentView(R.layout.activity_shop);
         listView = findViewById(android.R.id.list);
         bonuses = Bonus.getBonusesCatalog();
-        BonusesAdapter adapter = new BonusesAdapter(this, bonuses, true);
-        listView.setAdapter(adapter);
+        AppHelper.getInstance().generateShopAdapter(this);
+        listView.setAdapter(AppHelper.getInstance().shopAdapter);
     }
 }
 
