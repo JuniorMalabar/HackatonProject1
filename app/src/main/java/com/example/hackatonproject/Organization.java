@@ -49,9 +49,8 @@ public class Organization {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String[] CoordsStringList = gson.fromJson(value, String[].class);
-        for (String strTemp : CoordsStringList) {
-            HashMap<String, String> Coords = gson.fromJson(value, HashMap.class);
+        HashMap<String,String>[] CoordsStringList = gson.fromJson(value, HashMap[].class);
+        for (HashMap<String,String> Coords : CoordsStringList) {
             Location loc = new Location(LocationManager.GPS_PROVIDER);
             loc.setLatitude(Double.parseDouble(Coords.get("latitude")));
             loc.setLongitude(Double.parseDouble(Coords.get("longtitude")));
