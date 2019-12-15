@@ -18,10 +18,12 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".Leaderboard" />
-        <activity android:name=".Settings" />
-        <activity android:name=".Shop" />
-        <activity android:name=".AcceptedTasks" />
+        <activity android:name=".Leaderboard"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Shop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AcceptedTasks"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -29,11 +31,16 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AllTasksTab" />
-        <activity android:name=".TabsHost" />
-        <activity android:name=".Registration" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AllTasksTab"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TabsHost"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Registration"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Login"
             android:screenOrientation="portrait">
