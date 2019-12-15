@@ -54,7 +54,13 @@ public class LeaderboardAdapter extends BaseAdapter {
                 name.setTextColor(Color.YELLOW);
                 ratingPoints.setTextColor(Color.YELLOW);
             }
-            place.setText(Integer.toString(position + 1));
+            else{
+                place.setTextColor(Color.WHITE);
+                name.setTextColor(Color.WHITE);
+                ratingPoints.setTextColor(Color.WHITE);
+                place.setText(Integer.toString(position + 1));
+            }
+
         }
         else{
             if (position == 10){
@@ -64,6 +70,9 @@ public class LeaderboardAdapter extends BaseAdapter {
                 place.setText(Integer.toString(currentUserPlace));
             }
             else{
+                place.setTextColor(Color.WHITE);
+                name.setTextColor(Color.WHITE);
+                ratingPoints.setTextColor(Color.WHITE);
                 place.setText(Integer.toString(position + 1));
             }
         }
