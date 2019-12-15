@@ -87,7 +87,7 @@ public class TasksAdapter extends BaseAdapter {
                 View.OnClickListener mapConnector = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(context, MapsActivity.class);
                         intent.putExtra("type",task.type);
                         intent.putExtra("value",task.value);
                         context.startActivity(intent);
