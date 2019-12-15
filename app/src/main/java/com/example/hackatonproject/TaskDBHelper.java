@@ -109,4 +109,28 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         cv.put(column, value);
         db.update("tasks", cv, "_id = ?", new String[] {id.toString()});
     }
+
+    public ArrayList<Task> getAcceptedTasks() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Task> tasks = new ArrayList<>();
+        Cursor cursor = db.query("tasks", new String[] {"*"}, "decision", new String[] {"1"}, null, null, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex("_id"));
+                String value = cursor.getString(cursor.getColumnIndex("value"));
+                int type = cursor.getInt(cursor.getColumnIndex("type"));
+                int ratingReward = cursor.getInt(cursor.getColumnIndex("ratingReward"));
+                int pointsReward = cursor.getInt(cursor.getColumnIndex("pointsReward"));
+                boolean decision = cursor.getInt(cursor.getColumnIndex("decision")) == 1;
+                if (type == Task.TASK_TYPE_STEPS_COUNT){
+                    tasks.add(new StepsCountTask(id, value, ratingReward, pointsReward, decision));
+                }
+                else{
+                    tasks.add(new PointsVisitTask(id, type, value, ratingReward, pointsReward, decision));
+                }
+            }
+        }
+        return tasks;
+    }
 }

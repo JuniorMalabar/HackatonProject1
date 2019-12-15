@@ -58,6 +58,10 @@ public abstract class Task {
         generateTask(TASK_TYPE_GO_TO_ROUTE);
     }
 
+    public static ArrayList<Task> getAcceptedTasks() {
+        return dbHelper.getAcceptedTasks();
+    }
+
     public TaskDBHelper getDBHelper(){
         return dbHelper;
     }
