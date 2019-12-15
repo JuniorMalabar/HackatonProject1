@@ -51,7 +51,7 @@ public class Organization {
         }
         HashMap<String,String>[] CoordsStringList = gson.fromJson(value, HashMap[].class);
         for (HashMap<String,String> Coords : CoordsStringList) {
-            Location loc = new Location(LocationManager.GPS_PROVIDER);
+            Location loc = new Location(LocationManager.NETWORK_PROVIDER);
             loc.setLatitude(Double.parseDouble(Coords.get("latitude")));
             loc.setLongitude(Double.parseDouble(Coords.get("longtitude")));
             organizations.add(new Organization(Integer.parseInt(Coords.get("id")), Coords.get("organize_name"), loc));
