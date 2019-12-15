@@ -65,6 +65,8 @@ public class TasksAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     task.declineTask();
+                    tasks = Task.getAllTasks();
+                    notifyDataSetChanged();
                 }
             };
             decline.setOnClickListener(declineListener);
@@ -75,6 +77,8 @@ public class TasksAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     task.acceptTask();
+                    tasks.remove(task);
+                    notifyDataSetChanged();
                 }
             };
             accept.setOnClickListener(acceptListener);

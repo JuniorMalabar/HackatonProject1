@@ -58,6 +58,10 @@ public abstract class Task {
         generateTask(TASK_TYPE_GO_TO_ROUTE);
     }
 
+    public static ArrayList<Task> getAcceptedTasks() {
+        return dbHelper.getAcceptedTasks();
+    }
+
     public TaskDBHelper getDBHelper(){
         return dbHelper;
     }
@@ -159,10 +163,11 @@ public abstract class Task {
     }
 
     public void declineTask(){
-
+        dbHelper.delete(this);
     }
 
     public void acceptTask(){
+        dbHelper.update(id, "decision", 1);
 
     }
 
