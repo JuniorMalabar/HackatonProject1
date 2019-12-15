@@ -51,6 +51,13 @@ public abstract class Task {
         return new ArrayList<>(dbHelper.getAllTasks());
     }
 
+    public static void regenerate() {
+        dbHelper.recreateTable();
+        generateTask(TASK_TYPE_STEPS_COUNT);
+        generateTask(TASK_TYPE_GO_TO_POINT);
+        generateTask(TASK_TYPE_GO_TO_ROUTE);
+    }
+
     public TaskDBHelper getDBHelper(){
         return dbHelper;
     }
@@ -96,9 +103,8 @@ public abstract class Task {
         dbHelper.delete(this);
     }
 
-    public static Task generateTask(){
+    public static Task generateTask(int _type){
         Random random = new Random();
-        int _type = random.nextInt(TASK_TYPE_COUNT);
         switch (_type){
             case TASK_TYPE_STEPS_COUNT:
                 int steps = random.nextInt(5001) + 5000;

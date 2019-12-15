@@ -21,6 +21,7 @@ public class TabsHost extends TabActivity {
         username = (TextView) findViewById(R.id.username);
         username.setText( AppHelper.getInstance().getUser().getLogin() + "\nБаллы " +  AppHelper.getInstance().getUser().getPoints());
         TabHost tabHost = getTabHost();
+        Task.regenerate();
 
         // Вкладка Info
         android.widget.TabHost.TabSpec historyTab = tabHost.newTabSpec("History");
@@ -68,7 +69,7 @@ public class TabsHost extends TabActivity {
         tabHost.addTab(leaderboardTab);
         tabHost.addTab(settingsTab);
 
-        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+      //  AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         RecurringTasks recurringTasks = new RecurringTasks();
         recurringTasks.setRecurringTasks(this);
 
