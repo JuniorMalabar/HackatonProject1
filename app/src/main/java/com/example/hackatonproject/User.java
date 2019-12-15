@@ -86,15 +86,15 @@ public class User {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        HashMap<String,String>[] massOfBonuses = gson.fromJson(value, HashMap[].class);
+        HashMap<String, String>[] massOfBonuses = gson.fromJson(value, HashMap[].class);
 
         ArrayList<Bonus> retArr = new ArrayList<Bonus>();
 
-        for (HashMap<String,String> Bonusmap : massOfBonuses) {
-            retArr.add(new Bonus(Integer.parseInt(Bonusmap.get("id")), Bonusmap.get("organozation_name"), Bonusmap.get("description"), Bonusmap.get("promo_code"),  Integer.parseInt(Bonusmap.get("cost"))));
+        for (HashMap<String, String> Bonusmap : massOfBonuses) {
+            retArr.add(new Bonus(Integer.parseInt(Bonusmap.get("id")), Bonusmap.get("organozation_name"), Bonusmap.get("description"), Bonusmap.get("promo_code"), Integer.parseInt(Bonusmap.get("cost"))));
         }
-        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), retArr, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode"))==1); // DEBUG
-        }
+        return new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), retArr, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1); // DEBUG
+    }
 
     public static ArrayList<User> getUsersByRating() {
         // Нужно получить всех юзеров сортированных ПО УБЫВАНИЮ рейтигна из бд
@@ -115,7 +115,7 @@ public class User {
             e.printStackTrace();
         }
 
-        HashMap<String,String>[] UsersList = gson.fromJson(value, HashMap[].class);
+        HashMap<String, String>[] UsersList = gson.fromJson(value, HashMap[].class);
 
         if (UsersList == null) {
             return null;
@@ -123,7 +123,7 @@ public class User {
 
         ArrayList<User> retArr = new ArrayList<User>();
 
-        for (HashMap<String,String> Usermap : UsersList) {
+        for (HashMap<String, String> Usermap : UsersList) {
             retArr.add(new User(Integer.parseInt(Usermap.get("id")), Usermap.get("login"), Usermap.get("password"), Integer.parseInt(Usermap.get("current_value_of_bonuses")), null, Integer.parseInt(Usermap.get("whole_received_bonuses")), Integer.parseInt(Usermap.get("student_mode")) == 1));
         }
         return retArr;
@@ -153,18 +153,47 @@ public class User {
         return 0.25 * exp(-rating / 1000.0) + 0.75;
     }
 
-    public void givePointsReward(double reward) {
+    public void givePointsReward(int reward) {
         points += (int) reward;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", AppHelper.getInstance().getUser().id.toString());
+        map.put("additionalValue", Integer.toString(reward));
+        String query = RequestAsync.Url + "AddBonusesToUser.php";
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        RequestAsync task = new RequestAsync(map);
+        try {
+            task.execute(query).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public void giveRatingReward(Integer reward) {
+    public void giveRatingReward(int reward) {
         rating += reward;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", AppHelper.getInstance().getUser().id.toString());
+        map.put("additionalValue", Integer.toString(reward));
+        String query = RequestAsync.Url + "AddRatingToUser.php";
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        RequestAsync task = new RequestAsync(map);
+        try {
+            task.execute(query).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean tryToPurchaseBonus(Bonus bonus) {
         if (points >= bonus.getCost()) {
             points -= bonus.getCost();
-          //  historyOfBonuses.addBonus(bonus);
+            //  historyOfBonuses.addBonus(bonus);
             // Сохранить изменения в бд
             return true;
         }
